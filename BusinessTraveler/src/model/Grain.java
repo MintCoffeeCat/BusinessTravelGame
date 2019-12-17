@@ -15,11 +15,13 @@ public class Grain extends Crop {
 
     public Grain(String name, int rotTime, int level, double weight) {
         super(name, rotTime, level);
+        super.setType(GoodsType.get("grain"));
         this.weight = weight;
     }
 
     public Grain(String name, int rotTime, int level) {
         super(name, rotTime, level);
+        super.setType(GoodsType.get("grain"));
         this.weight = 0;
     }
 
@@ -41,6 +43,6 @@ public class Grain extends Crop {
     }
 
     public double calculatePrice() {
-        return this.weight * this.getPricePerKg();
+        return this.getPricePerKg();
     }
 }

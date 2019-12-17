@@ -16,12 +16,14 @@ public class Fruit extends Crop {
 
     public Fruit(String name, int rotTime, int level, double e_w, double p_w) {
         super(name, rotTime, level);
+        super.setType(GoodsType.get("fruit"));
         this.eatableWeight = e_w;
         this.pitWeight = p_w;
     }
 
     public Fruit(String name, int rotTime, int level) {
         super(name, rotTime, level);
+        super.setType(GoodsType.get("fruit"));
         this.eatableWeight = 0;
         this.pitWeight = 0;
     }
@@ -66,6 +68,6 @@ public class Fruit extends Crop {
     }
 
     public double calculatePrice() {
-        return (this.eatableWeight + this.pitWeight) * this.getPricePerKg();
+        return this.getPricePerKg();
     }
 }

@@ -31,7 +31,7 @@ public abstract class Crop extends Goods {
         super.setPrice(0);
         this.setName(name);
         this.setLevel(level);
-        this.setType(GoodsType.CROP);
+        this.setType(GoodsType.get("crop"));
         this.rotTime = rotTime;
         this.rot = false;
     }

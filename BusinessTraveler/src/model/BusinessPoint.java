@@ -9,13 +9,21 @@ package model;
  *
  * @author Yun_c
  */
-public abstract class BusinessPoint {
-    private final int MAX_GOODS_NUM;
-    private final int MAX_GOODS_LEVEL;
-    
+public  class BusinessPoint {
+    private Store store;
     private Path path;
-    public BusinessPoint(){
-        MAX_GOODS_NUM = 0;
-        MAX_GOODS_LEVEL = 0;
+    public BusinessPoint(Store s){
+        this.store = s;
+        this.path = null;
+    }
+    
+    private void generateEnvironment(StoreEnvironmentHandler env){
+        env.setStore(this.store);
+        this.store =env;
+    }
+    
+    public static void main(String[] args) {
+        BusinessPoint bsp = new BusinessPoint(new Store());
+        bsp.generateEnvironment(new PlainEnvironment(new ForestEnvironment()));
     }
 }

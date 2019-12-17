@@ -11,7 +11,7 @@ package model;
  */
 public abstract class Goods {
 
-    private GoodsType type;
+    private TypeNode type;
     private int pricePerKg;
     private int level;
     private String name;
@@ -42,11 +42,11 @@ public abstract class Goods {
         this.level = level;
     }
 
-    public GoodsType getType() {
+    public TypeNode getType() {
         return type;
     }
 
-    public void setType(GoodsType type) {
+    public void setType(TypeNode type) {
         this.type = type;
     }
 
@@ -58,11 +58,25 @@ public abstract class Goods {
         this.pricePerKg = price;
     }
 
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof Goods)) {
+            return false;
+        }
+
+        Goods g = (Goods) o;
+        if (g.name.equals(this.name) && g.level == this.level) {
+            return true;
+        }
+        return false;
+    }
+
     public abstract String getWeightInfo();
+
     public abstract double calculatePrice();
-}
-
-
-enum GoodsType {
-    CROP, ANIMAL, WOOD, MINERAL
 }
