@@ -12,6 +12,22 @@ package model;
 public  class BusinessPoint {
     private Store store;
     private Path path;
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
+    }
     public BusinessPoint(Store s){
         this.store = s;
         this.path = null;
