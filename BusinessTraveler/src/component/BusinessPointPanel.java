@@ -31,10 +31,7 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollPanel1 = new component.ScrollPanel();
-        scrollPanel2 = new component.ScrollPanel();
-        PointPicture = new javax.swing.JPanel();
-        weatherPicture = new javax.swing.JPanel();
+        backgroundPanel2 = new component.BackgroundPanel();
         name = new javax.swing.JPanel();
         townName = new java.awt.Label();
         townLevel_pre = new javax.swing.JLabel();
@@ -42,37 +39,36 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         speciality_pre = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         environmentList = new component.ScrollPanel();
-        scrollPanel3 = new component.ScrollPanel();
+        specialityList = new component.ScrollPanel();
+        pointLevel_pre = new javax.swing.JLabel();
+        pointLevel = new javax.swing.JLabel();
         TradeButton = new javax.swing.JButton();
         SleepButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        backgroundPanel3 = new component.BackgroundPanel();
+        BusinessPointPic = new component.BackgroundPanel();
+        weatherPic = new component.BackgroundPanel();
 
-        javax.swing.GroupLayout PointPictureLayout = new javax.swing.GroupLayout(PointPicture);
-        PointPicture.setLayout(PointPictureLayout);
-        PointPictureLayout.setHorizontalGroup(
-            PointPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 184, Short.MAX_VALUE)
+        javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
+        backgroundPanel2.setLayout(backgroundPanel2Layout);
+        backgroundPanel2Layout.setHorizontalGroup(
+            backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        PointPictureLayout.setVerticalGroup(
-            PointPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 67, Short.MAX_VALUE)
+        backgroundPanel2Layout.setVerticalGroup(
+            backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout weatherPictureLayout = new javax.swing.GroupLayout(weatherPicture);
-        weatherPicture.setLayout(weatherPictureLayout);
-        weatherPictureLayout.setHorizontalGroup(
-            weatherPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 59, Short.MAX_VALUE)
-        );
-        weatherPictureLayout.setVerticalGroup(
-            weatherPictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 0)));
+
+        name.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         townName.setAlignment(java.awt.Label.CENTER);
         townName.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         townName.setText("Field");
 
-        townLevel_pre.setText("Level");
+        townLevel_pre.setText("Goods Level");
 
         townLevel.setText("0");
 
@@ -80,47 +76,58 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
 
         jLabel1.setText("Environment");
 
+        environmentList.setBackground(new java.awt.Color(255, 255, 255));
+        environmentList.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        specialityList.setBackground(new java.awt.Color(255, 255, 255));
+        specialityList.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        pointLevel_pre.setText("Point Level");
+        pointLevel_pre.setToolTipText("");
+
+        pointLevel.setText("0");
+
         javax.swing.GroupLayout nameLayout = new javax.swing.GroupLayout(name);
         name.setLayout(nameLayout);
         nameLayout.setHorizontalGroup(
             nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(environmentList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(specialityList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(townName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(nameLayout.createSequentialGroup()
                 .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(speciality_pre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(townName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, nameLayout.createSequentialGroup()
-                                .addComponent(townLevel_pre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(townLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(speciality_pre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(nameLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(environmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(nameLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(scrollPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(townLevel_pre)
+                            .addComponent(pointLevel_pre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(townLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pointLevel, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         nameLayout.setVerticalGroup(
             nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nameLayout.createSequentialGroup()
-                .addComponent(townName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(townName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(townLevel_pre)
                     .addComponent(townLevel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pointLevel_pre)
+                    .addComponent(pointLevel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(environmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(environmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(speciality_pre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
+                .addComponent(specialityList, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         townName.getAccessibleContext().setAccessibleDescription("");
@@ -128,62 +135,136 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         TradeButton.setText("Trade");
 
         SleepButton.setText("Sleep");
+        SleepButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SleepButtonActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        BusinessPointPic.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
+        BusinessPointPic.setPreferredSize(new java.awt.Dimension(184, 67));
+
+        javax.swing.GroupLayout BusinessPointPicLayout = new javax.swing.GroupLayout(BusinessPointPic);
+        BusinessPointPic.setLayout(BusinessPointPicLayout);
+        BusinessPointPicLayout.setHorizontalGroup(
+            BusinessPointPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 188, Short.MAX_VALUE)
+        );
+        BusinessPointPicLayout.setVerticalGroup(
+            BusinessPointPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 61, Short.MAX_VALUE)
+        );
+
+        weatherPic.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
+        weatherPic.setPreferredSize(new java.awt.Dimension(67, 67));
+
+        javax.swing.GroupLayout weatherPicLayout = new javax.swing.GroupLayout(weatherPic);
+        weatherPic.setLayout(weatherPicLayout);
+        weatherPicLayout.setHorizontalGroup(
+            weatherPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 61, Short.MAX_VALUE)
+        );
+        weatherPicLayout.setVerticalGroup(
+            weatherPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 61, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout backgroundPanel3Layout = new javax.swing.GroupLayout(backgroundPanel3);
+        backgroundPanel3.setLayout(backgroundPanel3Layout);
+        backgroundPanel3Layout.setHorizontalGroup(
+            backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel3Layout.createSequentialGroup()
+                .addComponent(BusinessPointPic, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(weatherPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        backgroundPanel3Layout.setVerticalGroup(
+            backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BusinessPointPic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(weatherPic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PointPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(weatherPicture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TradeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SleepButton, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SleepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PointPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(weatherPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(TradeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SleepButton)
-                .addGap(0, 41, Short.MAX_VALUE))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SleepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SleepButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SleepButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PointPicture;
+    private component.BackgroundPanel BusinessPointPic;
     private javax.swing.JButton SleepButton;
     private javax.swing.JButton TradeButton;
+    private component.BackgroundPanel backgroundPanel2;
+    private component.BackgroundPanel backgroundPanel3;
     private component.ScrollPanel environmentList;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel name;
-    private component.ScrollPanel scrollPanel1;
-    private component.ScrollPanel scrollPanel2;
-    private component.ScrollPanel scrollPanel3;
+    private javax.swing.JLabel pointLevel;
+    private javax.swing.JLabel pointLevel_pre;
+    private component.ScrollPanel specialityList;
     private javax.swing.JLabel speciality_pre;
     private javax.swing.JLabel townLevel;
     private javax.swing.JLabel townLevel_pre;
     private java.awt.Label townName;
-    private javax.swing.JPanel weatherPicture;
+    private component.BackgroundPanel weatherPic;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void update(Subject s) {
         if(s instanceof BusinessPoint){
-            
+            BusinessPoint newBP = (BusinessPoint)s;
+            this.townName.setText(newBP.getName());
+            this.townLevel.setText(newBP.getStore().getMAX_GOODS_LEVEL() + "");
+            this.pointLevel.setText(newBP.getPointLevel());
+            this.environmentList.addItem(newBP.getEnvironment());
+            this.specialityList.addItem(newBP.getStore().getSpeciality());
+            this.BusinessPointPic.setImage(newBP.getImg());
+            //this.weatherPic.setImage();
         }
     }
 }

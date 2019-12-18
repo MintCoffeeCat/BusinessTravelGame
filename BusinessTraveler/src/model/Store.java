@@ -6,6 +6,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import myinterface.Subject;
 import myinterface.Tradable;
 
@@ -22,6 +24,10 @@ public class Store implements Tradable, Subject {
 
     public int getAdditionalLevel() {
         return additionalLevel;
+    }
+
+    public void addAdditionalLevel() {
+        this.additionalLevel += 1;
     }
 
     public void setAdditionalLevel(int additionalLevel) {
@@ -49,7 +55,7 @@ public class Store implements Tradable, Subject {
     }
 
     public void addGoods(Goods g, int num) {
-        if (g.getLevel() > this.MAX_GOODS_LEVEL) {
+        if (g.getLevel() > this.MAX_GOODS_LEVEL + this.additionalLevel) {
             return;
         }
         if (num > this.MAX_GOODS_NUM) {
@@ -72,6 +78,21 @@ public class Store implements Tradable, Subject {
                 return;
             }
         }
+    }
+    public String[] getEnvironment() {
+        return null;
+    }
+    public String[] getSpeciality() {
+        return null;
+    }
+    
+    protected void getEnvironment(ArrayList<String> env) {
+    }
+    protected void getSpeciality(Set<String> spe) {
+    }
+
+    public String toString() {
+        return "store";
     }
 
     @Override

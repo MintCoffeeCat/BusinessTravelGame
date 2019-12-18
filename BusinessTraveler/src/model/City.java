@@ -13,5 +13,6 @@ public class City extends BusinessPoint{
     public City(String name){
         this.name = name;
         this.store = new Store(200,3);
+        this.pointLevel = "City";
     }
 }

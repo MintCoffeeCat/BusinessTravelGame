@@ -5,8 +5,11 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import myinterface.Tradable;
 
 /**
@@ -15,11 +18,19 @@ import myinterface.Tradable;
  */
 public class StoreEnvironmentHandler extends Store {
 
+    protected static final ArrayList<String> environmentList = new ArrayList<String>() {
+        {
+            add("Plain");
+            add("Mountain");
+            add("Forest");
+        }
+    };
     private Store store;
     protected Map<String, Double> priceAdjust;
 
     public StoreEnvironmentHandler(Store s) {
         this.store = s;
+        this.store.addAdditionalLevel();
     }
 
     public StoreEnvironmentHandler() {
@@ -31,11 +42,15 @@ public class StoreEnvironmentHandler extends Store {
     }
 
     public int getAdditionalLevel() {
-        return store.getAdditionalLevel();
+        return this.store.getAdditionalLevel();
+    }
+
+    public void addAdditionalLevel() {
+        this.store.addAdditionalLevel();
     }
 
     public void setAdditionalLevel(int additionalLevel) {
-        store.setAdditionalLevel(additionalLevel);
+        this.store.setAdditionalLevel(additionalLevel);
     }
 
     public int getMAX_GOODS_NUM() {
@@ -57,7 +72,30 @@ public class StoreEnvironmentHandler extends Store {
     public double buy(Goods g, int num) {
         return store.buy(g, num);
     }
+    public String[] getEnvironment(){
+        ArrayList<String> envs = new ArrayList<String>();
+        this.getEnvironment(envs);
+        String[] result = new String[envs.size()];
+        return (String[])envs.toArray(result);
+    }
+    public void getEnvironment(ArrayList<String> envs) {
+        envs.add(this.toString());
+        this.store.getEnvironment(envs);
+    }
+    public String[] getSpeciality() {
+        Set<String> speciality = new HashSet<String>();
+        this.getSpeciality(speciality);
+        String[] result = new String[speciality.size()];
+        return (String[])speciality.toArray(result);
+    }
 
+    public void getSpeciality(Set<String> spe) {
+        Set<String> my_spe = this.priceAdjust.keySet();
+        if (my_spe != null) {
+            spe.addAll(my_spe);
+        }
+        this.store.getSpeciality(spe);
+    }
     protected double calculateFinalPrice(double price, TypeNode tn) {
         double final_factor = 1;
         do {
@@ -67,95 +105,10 @@ public class StoreEnvironmentHandler extends Store {
             }
         } while ((tn = tn.getFather()) != null);
         return price * final_factor;
+
     }
 
 }
 
-class PlainEnvironment extends StoreEnvironmentHandler {
 
-    public PlainEnvironment() {
-        super();
-        this.init();
 
-    }
-
-    public PlainEnvironment(Store s) {
-        super(s);
-        this.init();
-    }
-
-    public void init() {
-        this.priceAdjust = new HashMap<String, Double>();
-        this.priceAdjust.put("crop", 0.9);
-        this.priceAdjust.put("Grain", 0.9);
-        this.priceAdjust.put("fruit", 0.9);
-    }
-
-    public double sell(Goods g, int num) {
-        double price = super.sell(g, num);
-        return this.calculateFinalPrice(price, g.getType());
-    }
-
-    public double buy(Goods g, int num) {
-        double price = super.buy(g, num);
-        return this.calculateFinalPrice(price, g.getType());
-    }
-}
-
-class MountainEnvironment extends StoreEnvironmentHandler {
-
-    public MountainEnvironment(Store s) {
-        super(s);
-        this.init();
-    }
-
-    public MountainEnvironment() {
-        super();
-        this.init();
-
-    }
-
-    public void init() {
-        this.priceAdjust = new HashMap<String, Double>();
-        this.priceAdjust.put("mineral", 0.95);
-        this.priceAdjust.put("stone", 0.8);
-        this.priceAdjust.put("crystal", 0.9);
-    }
-
-    public double sell(Goods g, int num) {
-        double price = super.sell(g, num);
-        return this.calculateFinalPrice(price, g.getType());
-    }
-
-    public double buy(Goods g, int num) {
-        double price = super.buy(g, num);
-        return this.calculateFinalPrice(price, g.getType());
-    }
-}
-
-class ForestEnvironment extends StoreEnvironmentHandler {
-
-    public ForestEnvironment(Store s) {
-        super(s);
-        this.init();
-    }
-    public ForestEnvironment(){
-        super();
-        this.init();
-    }
-    public void init() {
-        this.priceAdjust = new HashMap<String, Double>();
-        this.priceAdjust.put("wood", 0.95);
-        this.priceAdjust.put("fruit", 0.9);
-    }
-
-    public double sell(Goods g, int num) {
-        double price = super.sell(g, num);
-        return this.calculateFinalPrice(price, g.getType());
-    }
-
-    public double buy(Goods g, int num) {
-        double price = super.buy(g, num);
-        return this.calculateFinalPrice(price, g.getType());
-    }
-}

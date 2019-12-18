@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import myinterface.Subject;
 
 /**
@@ -12,10 +15,11 @@ import myinterface.Subject;
  * @author Yun_c
  */
 public abstract class BusinessPoint implements Subject {
-
+    protected ImageIcon img;
     protected String name;
     protected Store store;
     protected Path path;
+    protected String pointLevel;
     
     public BusinessPoint(){}
     public BusinessPoint(String name, Store s) {
@@ -23,7 +27,17 @@ public abstract class BusinessPoint implements Subject {
         this.store = s;
         this.path = null;
     }
+    public String[] getEnvironment(){
+        return this.store.getEnvironment();
+    }
+    public String getPointLevel() {
+        return pointLevel;
+    }
 
+    public ImageIcon getImg() {
+        return img;
+    }
+    
     public String getName() {
         return name;
     }
@@ -48,8 +62,7 @@ public abstract class BusinessPoint implements Subject {
         this.path = path;
     }
 
-    private void generateEnvironment(StoreEnvironmentHandler env) {
-        env.setStore(this.store);
+    public void generateEnvironment(Store env) {
         this.store = env;
     }
 }

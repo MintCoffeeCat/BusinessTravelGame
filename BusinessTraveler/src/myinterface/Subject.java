@@ -16,6 +16,7 @@ public interface Subject {
     
     default public void attach(Observer o){
         this.observer.add(o);
+        o.update(this);
     }
     default public void detach(Observer o){
         this.observer.remove(o);

@@ -6,8 +6,8 @@
 package component;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
-import javax.swing.JScrollBar;
 
 /**
  *
@@ -31,49 +31,75 @@ public class ScrollPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(null).createEntityManager();
-        entityManager2 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(null).createEntityManager();
-        jScrollBar1 = new javax.swing.JScrollBar();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        itemList = new javax.swing.JList<>();
 
-        jScrollBar1.setMaximum(500);
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("jLabel2");
+
+        setBackground(new java.awt.Color(204, 204, 204));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        itemList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(itemList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager entityManager1;
-    private javax.persistence.EntityManager entityManager2;
-    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JList<String> itemList;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<JLabel> env = new ArrayList<JLabel>();
 
-    public void addItem(String s) {
-        JLabel env_label = new JLabel(s);
-        env_label.setBounds(0, 30 * this.env.size(), 100, 30);
-        this.env.add(env_label);
-        this.add(env_label);
+    private DefaultListModel listModel = new DefaultListModel();
 
-        this.revalidate();
-        this.repaint();
+    public void addItem(String... str) {
+        if (str == null) {
+            return;
+        }
+
+        for (String s : str) {
+            listModel.addElement(s);
+        }
+        this.itemList.setModel(this.listModel);
+//        this.revalidate();
+//        this.repaint();
+    }
+
+    public void addItem(ArrayList<String> str) {
+        if (str == null) {
+            return;
+        }
+        for (String s : str) {
+            listModel.addElement(s);
+        }
+        this.itemList.setModel(this.listModel);
+
+//        this.revalidate();
+//        this.repaint();
     }
 
     public void clearItem() {
-        this.env.clear();
-        
-        this.revalidate();
-        this.repaint();
+        this.listModel.clear();
+        this.itemList.setModel(this.listModel);
+//        this.revalidate();
+//        this.repaint();
     }
 
 }
