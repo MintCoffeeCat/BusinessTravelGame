@@ -6,13 +6,14 @@
 package model;
 
 import java.util.ArrayList;
+import myinterface.Subject;
 import myinterface.Tradable;
 
 /**
  *
  * @author Yun_c
  */
-public class Store implements Tradable {
+public class Store implements Tradable, Subject {
 
     private final int MAX_GOODS_NUM;
     private final int MAX_GOODS_LEVEL;

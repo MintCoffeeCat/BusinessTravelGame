@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 package model;
+import myinterface.TimeInfluencable;
 
 /**
  *
  * @author Yun_c
  */
-public abstract class Crop extends Goods {
+public abstract class Crop extends Goods implements TimeInfluencable{
 
     private boolean rot;
     private int rotTime;

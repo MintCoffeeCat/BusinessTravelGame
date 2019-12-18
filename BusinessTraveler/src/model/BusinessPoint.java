@@ -5,13 +5,32 @@
  */
 package model;
 
+import myinterface.Subject;
+
 /**
  *
  * @author Yun_c
  */
-public  class BusinessPoint {
-    private Store store;
-    private Path path;
+public abstract class BusinessPoint implements Subject {
+
+    protected String name;
+    protected Store store;
+    protected Path path;
+    
+    public BusinessPoint(){}
+    public BusinessPoint(String name, Store s) {
+        this.name = name;
+        this.store = s;
+        this.path = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Store getStore() {
         return store;
@@ -28,18 +47,12 @@ public  class BusinessPoint {
     public void setPath(Path path) {
         this.path = path;
     }
-    public BusinessPoint(Store s){
-        this.store = s;
-        this.path = null;
-    }
-    
-    private void generateEnvironment(StoreEnvironmentHandler env){
+
+    private void generateEnvironment(StoreEnvironmentHandler env) {
         env.setStore(this.store);
-        this.store =env;
-    }
-    
-    public static void main(String[] args) {
-        BusinessPoint bsp = new BusinessPoint(new Store());
-        bsp.generateEnvironment(new PlainEnvironment(new ForestEnvironment()));
+        this.store = env;
     }
 }
+
+
+

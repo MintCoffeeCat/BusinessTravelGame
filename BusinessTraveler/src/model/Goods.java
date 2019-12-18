@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 package model;
+import myinterface.Subject;
 
 /**
  *
  * @author Yun_c
  */
-public abstract class Goods {
+public abstract class Goods implements Subject {
 
     private TypeNode type;
     private int pricePerKg;
