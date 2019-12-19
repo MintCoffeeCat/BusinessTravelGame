@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.ImageIcon;
-import model.Store;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
 
@@ -74,6 +73,7 @@ public abstract class BusinessPoint implements Subject {
 
     public void generateEnvironment(EnvironmentInfluencable env) {
         this.store = env;
+        
     }
 }
 

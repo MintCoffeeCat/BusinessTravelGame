@@ -7,7 +7,6 @@ package model.BusinessPoint;
 
 import model.BusinessPoint.BusinessPoint;
 import javax.swing.ImageIcon;
-import model.Store;
 
 /**
  *

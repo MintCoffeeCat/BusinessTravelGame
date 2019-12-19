@@ -5,7 +5,7 @@
  */
 package component;
 import model.BusinessPoint.BusinessPoint;
-import model.Store;
+import model.BusinessPoint.Store;
 import myinterface.Observer;
 import myinterface.Subject;
 

@@ -18,6 +18,10 @@ public class GoodsType {
     private static Map<String, TypeNode> types;
 
     public GoodsType() {
+        this.loadGoodsType();
+    }
+
+    public static void loadGoodsType() {
         ArrayList<TypeNode> n = new ArrayList<TypeNode>();
         TypeNode crop = new TypeNode("crop");
         TypeNode mineral = new TypeNode("mineral");
@@ -40,4 +44,3 @@ public class GoodsType {
         return GoodsType.types.get(nm);
     }
 }
-

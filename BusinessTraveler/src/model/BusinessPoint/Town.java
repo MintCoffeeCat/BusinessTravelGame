@@ -6,7 +6,6 @@
 package model.BusinessPoint;
 
 import model.BusinessPoint.BusinessPoint;
-import model.Store;
 
 /**
  *

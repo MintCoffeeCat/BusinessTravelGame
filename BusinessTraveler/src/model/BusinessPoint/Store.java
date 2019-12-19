@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.BusinessPoint;
 
 import model.Goods.Goods;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import model.Environment.Environment;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Observer;
 import myinterface.Subject;
@@ -42,14 +43,20 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
     public Map<String, Integer> getAdditionalLevel() {
         return additionalLevel;
     }
-    public void addAdditionalLevel(String speciality){
-        Integer lv = this.additionalLevel.get(speciality);
-        if(lv == null){
-            this.additionalLevel.put(speciality, 1);
-        }else{
-            this.additionalLevel.put(speciality, lv + 1);
-        }
+
+    public void stageInfluence(Environment e) {
+        Set<String> envSpe = e.getSpeciality();
+        envSpe.forEach((item) -> {
+            Integer lv = this.additionalLevel.get(item);
+            if (lv == null) {
+                this.additionalLevel.put(item, 1);
+            } else {
+                this.additionalLevel.put(item, lv + 1);
+            }
+        });
+
     }
+
     public int getMAX_GOODS_NUM() {
         return MAX_GOODS_NUM;
     }
@@ -64,7 +71,9 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
 
     public void addGoods(Goods g, int num) {
         Integer addLv = this.additionalLevel.get(g.getType().getTypeName());
-        if(addLv == null)addLv = 0;
+        if (addLv == null) {
+            addLv = 0;
+        }
         if (g.getLevel() > this.MAX_GOODS_LEVEL + addLv) {
             return;
         }

@@ -7,7 +7,7 @@ package model.Environment;
 
 import model.Goods.Goods;
 import java.util.HashMap;
-import model.Store;
+import model.BusinessPoint.Store;
 
 /**
  *
