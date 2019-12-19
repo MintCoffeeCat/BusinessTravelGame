@@ -5,7 +5,7 @@
  */
 package factory;
 
-import model.Crop;
+import model.Goods.Crop;
 
 
 /**

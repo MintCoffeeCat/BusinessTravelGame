@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package component;
-import model.BusinessPoint;
+import model.BusinessPoint.BusinessPoint;
 import model.Store;
 import myinterface.Observer;
 import myinterface.Subject;
@@ -262,7 +262,7 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
             this.townLevel.setText(newBP.getStore().getMAX_GOODS_LEVEL() + "");
             this.pointLevel.setText(newBP.getPointLevel());
             this.environmentList.addItem(newBP.getEnvironment());
-            this.specialityList.addItem(newBP.getStore().getSpeciality());
+            this.specialityList.addItem(newBP.getStoreSpeciality());
             this.BusinessPointPic.setImage(newBP.getImg());
             //this.weatherPic.setImage();
         }

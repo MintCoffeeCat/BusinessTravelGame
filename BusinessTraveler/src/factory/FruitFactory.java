@@ -8,8 +8,8 @@ package factory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import model.Crop;
-import model.Fruit;
+import model.Goods.Crop;
+import model.Goods.Fruit;
 
 /**
  *

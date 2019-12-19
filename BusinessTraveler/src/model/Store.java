@@ -5,9 +5,13 @@
  */
 package model;
 
+import model.Goods.Goods;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import myinterface.EnvironmentInfluencable;
+import myinterface.Observer;
 import myinterface.Subject;
 import myinterface.Tradable;
 
@@ -15,12 +19,24 @@ import myinterface.Tradable;
  *
  * @author Yun_c
  */
-public class Store implements Tradable, Subject {
+public class Store implements Tradable, Subject, EnvironmentInfluencable {
 
     private final int MAX_GOODS_NUM;
     private final int MAX_GOODS_LEVEL;
     private int additionalLevel;
     private ArrayList<Slot> slots;
+
+    public Store() {
+        this.MAX_GOODS_NUM = 0;
+        this.MAX_GOODS_LEVEL = 0;
+        this.additionalLevel = 0;
+    }
+
+    public Store(int max_num, int max_level) {
+        this.MAX_GOODS_NUM = max_num;
+        this.MAX_GOODS_LEVEL = max_level;
+        this.additionalLevel = 0;
+    }
 
     public int getAdditionalLevel() {
         return additionalLevel;
@@ -42,16 +58,8 @@ public class Store implements Tradable, Subject {
         return MAX_GOODS_LEVEL;
     }
 
-    public Store() {
-        this.MAX_GOODS_NUM = 0;
-        this.MAX_GOODS_LEVEL = 0;
-        this.additionalLevel = 0;
-    }
-
-    public Store(int max_num, int max_level) {
-        this.MAX_GOODS_NUM = max_num;
-        this.MAX_GOODS_LEVEL = max_level;
-        this.additionalLevel = 0;
+    public String toString() {
+        return "store";
     }
 
     public void addGoods(Goods g, int num) {
@@ -79,21 +87,6 @@ public class Store implements Tradable, Subject {
             }
         }
     }
-    public String[] getEnvironment() {
-        return null;
-    }
-    public String[] getSpeciality() {
-        return null;
-    }
-    
-    protected void getEnvironment(ArrayList<String> env) {
-    }
-    protected void getSpeciality(Set<String> spe) {
-    }
-
-    public String toString() {
-        return "store";
-    }
 
     @Override
     public double sell(Goods g, int num) {
@@ -112,6 +105,14 @@ public class Store implements Tradable, Subject {
     public double buy(Goods g, int num) {
         this.addGoods(g, num);
         return (g.calculatePrice() * num);
+    }
+
+    @Override
+    public double calculateInfluence(EnvironmentInfluencable ev, Map<String, Double> influenceList) {
+        if(!(ev instanceof Goods))return 0;
+        Goods good = (Goods)(ev);
+        String typeName = good.getType().getTypeName();
+        return good.getPricePerKg() * influenceList.get(typeName);
     }
 
 }

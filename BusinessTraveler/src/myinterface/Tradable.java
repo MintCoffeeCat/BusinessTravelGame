@@ -5,7 +5,7 @@
  */
 package myinterface;
 
-import model.Goods;
+import model.Goods.Goods;
 
 /**
  *

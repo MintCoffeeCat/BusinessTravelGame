@@ -7,9 +7,9 @@ package main;
 
 import factory.BusinessPointFactory;
 import javax.swing.JFrame;
-import model.BusinessPoint;
-import model.ForestEnvironment;
-import model.PlainEnvironment;
+import model.BusinessPoint.BusinessPoint;
+import model.Environment.ForestEnvironment;
+import model.Environment.PlainEnvironment;
 import view.MainFrame;
 
 

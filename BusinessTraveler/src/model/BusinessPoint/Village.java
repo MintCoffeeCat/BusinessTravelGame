@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.BusinessPoint;
 
+import model.BusinessPoint.BusinessPoint;
 import javax.swing.ImageIcon;
+import model.Store;
 
 /**
  *

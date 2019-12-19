@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.BusinessPoint;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.swing.ImageIcon;
+import model.Store;
+import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
 
 /**
@@ -17,7 +20,7 @@ import myinterface.Subject;
 public abstract class BusinessPoint implements Subject {
     protected ImageIcon img;
     protected String name;
-    protected Store store;
+    protected EnvironmentInfluencable store;
     protected Path path;
     protected String pointLevel;
     
@@ -28,7 +31,14 @@ public abstract class BusinessPoint implements Subject {
         this.path = null;
     }
     public String[] getEnvironment(){
-        return this.store.getEnvironment();
+        Set<String> envs = this.store.getEnvironment();
+        String[] envStr = new String[envs.size()];
+        return (String[])envs.toArray(envStr);
+    }
+    public String[] getStoreSpeciality(){
+        Set<String> spe = this.store.getSpeciality();
+        String[] envStr = new String[spe.size()];
+        return (String[])spe.toArray(envStr);
     }
     public String getPointLevel() {
         return pointLevel;
@@ -47,7 +57,7 @@ public abstract class BusinessPoint implements Subject {
     }
 
     public Store getStore() {
-        return store;
+        return (Store)store.getOri();
     }
 
     public void setStore(Store store) {
@@ -62,7 +72,7 @@ public abstract class BusinessPoint implements Subject {
         this.path = path;
     }
 
-    public void generateEnvironment(Store env) {
+    public void generateEnvironment(EnvironmentInfluencable env) {
         this.store = env;
     }
 }

@@ -6,10 +6,10 @@
 package factory;
 
 import java.util.Random;
-import model.BusinessPoint;
-import model.City;
-import model.Town;
-import model.Village;
+import model.BusinessPoint.BusinessPoint;
+import model.BusinessPoint.City;
+import model.BusinessPoint.Town;
+import model.BusinessPoint.Village;
 
 /**
  *
