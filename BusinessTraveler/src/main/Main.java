@@ -25,6 +25,5 @@ public class Main {
         bf.generateEnvironment(new PlainEnvironment(new ForestEnvironment(bf.getStore())));
         bf.attach(jf.getBusinessPointPanel());
         jf.setVisible(true);
-        
     }
 }

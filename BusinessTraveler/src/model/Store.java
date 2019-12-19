@@ -7,6 +7,7 @@ package model;
 
 import model.Goods.Goods;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -23,33 +24,32 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
 
     private final int MAX_GOODS_NUM;
     private final int MAX_GOODS_LEVEL;
-    private int additionalLevel;
+    private Map<String, Integer> additionalLevel;
     private ArrayList<Slot> slots;
 
     public Store() {
         this.MAX_GOODS_NUM = 0;
         this.MAX_GOODS_LEVEL = 0;
-        this.additionalLevel = 0;
+        this.additionalLevel = new HashMap<String, Integer>();
     }
 
     public Store(int max_num, int max_level) {
         this.MAX_GOODS_NUM = max_num;
         this.MAX_GOODS_LEVEL = max_level;
-        this.additionalLevel = 0;
+        this.additionalLevel = new HashMap<String, Integer>();
     }
 
-    public int getAdditionalLevel() {
+    public Map<String, Integer> getAdditionalLevel() {
         return additionalLevel;
     }
-
-    public void addAdditionalLevel() {
-        this.additionalLevel += 1;
+    public void addAdditionalLevel(String speciality){
+        Integer lv = this.additionalLevel.get(speciality);
+        if(lv == null){
+            this.additionalLevel.put(speciality, 1);
+        }else{
+            this.additionalLevel.put(speciality, lv + 1);
+        }
     }
-
-    public void setAdditionalLevel(int additionalLevel) {
-        this.additionalLevel = additionalLevel;
-    }
-
     public int getMAX_GOODS_NUM() {
         return MAX_GOODS_NUM;
     }
@@ -63,7 +63,9 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
     }
 
     public void addGoods(Goods g, int num) {
-        if (g.getLevel() > this.MAX_GOODS_LEVEL + this.additionalLevel) {
+        Integer addLv = this.additionalLevel.get(g.getType().getTypeName());
+        if(addLv == null)addLv = 0;
+        if (g.getLevel() > this.MAX_GOODS_LEVEL + addLv) {
             return;
         }
         if (num > this.MAX_GOODS_NUM) {
@@ -109,12 +111,13 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
 
     @Override
     public double calculateInfluence(EnvironmentInfluencable ev, Map<String, Double> influenceList) {
-        if(!(ev instanceof Goods))return 0;
-        Goods good = (Goods)(ev);
+        if (!(ev instanceof Goods)) {
+            return 0;
+        }
+        Goods good = (Goods) (ev);
         String typeName = good.getType().getTypeName();
         return good.getPricePerKg() * influenceList.get(typeName);
     }
-
 }
 
 class Slot {

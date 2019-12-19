@@ -16,6 +16,7 @@ public interface EnvironmentInfluencable {
     //public ArrayList<String> environmentList = new ArrayList<String>();
     
     public double calculateInfluence(EnvironmentInfluencable ev, Map<String, Double> influenceList);
+    default public void stageInfluence(){}
     default public Set<String> getEnvironment(){return new HashSet<String>();};
     default public Set<String> getSpeciality(){return new HashSet<String>();};
     default public Object getOri(){return this;};
