@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package component;
+
+import javax.swing.ImageIcon;
 import model.BusinessPoint.BusinessPoint;
 import model.BusinessPoint.Store;
+import model.User.User;
 import myinterface.Observer;
 import myinterface.Subject;
 
@@ -13,13 +16,25 @@ import myinterface.Subject;
  *
  * @author Yun_c
  */
-public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
+public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
 
     /**
      * Creates new form BusinessPointPanel
      */
-    public BusinessPointPanel() {
+    public BusinessPointPanel(boolean isArrive) {
+        this.isArrive = isArrive;
         initComponents();
+    }
+
+    public BusinessPointPanel() {
+        this.isArrive = true;
+        initComponents();
+        stateSetting();
+    }
+
+    public void setArrive(boolean b) {
+        this.isArrive = b;
+        stateSetting();
     }
 
     /**
@@ -48,6 +63,7 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         backgroundPanel3 = new component.BackgroundPanel();
         BusinessPointPic = new component.BackgroundPanel();
         weatherPic = new component.BackgroundPanel();
+        travelButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
@@ -91,8 +107,6 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         name.setLayout(nameLayout);
         nameLayout.setHorizontalGroup(
             nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(environmentList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(specialityList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(townName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(nameLayout.createSequentialGroup()
                 .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,6 +121,8 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
                             .addComponent(townLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pointLevel, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addComponent(specialityList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(environmentList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         nameLayout.setVerticalGroup(
             nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +166,7 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         BusinessPointPic.setLayout(BusinessPointPicLayout);
         BusinessPointPicLayout.setHorizontalGroup(
             BusinessPointPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
+            .addGap(0, 152, Short.MAX_VALUE)
         );
         BusinessPointPicLayout.setVerticalGroup(
             BusinessPointPicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,8 +192,8 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         backgroundPanel3Layout.setHorizontalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel3Layout.createSequentialGroup()
-                .addComponent(BusinessPointPic, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BusinessPointPic, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(weatherPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         backgroundPanel3Layout.setVerticalGroup(
@@ -193,27 +209,30 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        travelButton.setText("Travel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(travelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SleepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+                .addGap(63, 63, 63))
+            .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,11 +240,13 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addComponent(TradeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SleepButton)
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(travelButton)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -233,6 +254,17 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
     }//GEN-LAST:event_SleepButtonActionPerformed
 
+    private void stateSetting() {
+        if (this.isArrive) {
+            this.travelButton.setEnabled(false);
+            this.SleepButton.setEnabled(true);
+            this.TradeButton.setEnabled(true);
+        } else {
+            this.travelButton.setEnabled(true);
+            this.SleepButton.setEnabled(false);
+            this.TradeButton.setEnabled(false);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.BackgroundPanel BusinessPointPic;
@@ -251,20 +283,47 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer{
     private javax.swing.JLabel townLevel;
     private javax.swing.JLabel townLevel_pre;
     private java.awt.Label townName;
+    private javax.swing.JButton travelButton;
     private component.BackgroundPanel weatherPic;
     // End of variables declaration//GEN-END:variables
+    private boolean isArrive;
 
     @Override
     public void update(Subject s) {
-        if(s instanceof BusinessPoint){
-            BusinessPoint newBP = (BusinessPoint)s;
-            this.townName.setText(newBP.getName());
-            this.townLevel.setText(newBP.getStore().getMAX_GOODS_LEVEL() + "");
-            this.pointLevel.setText(newBP.getPointLevel());
-            this.environmentList.addItem(newBP.getEnvironment());
-            this.specialityList.addItem(newBP.getStoreSpeciality());
-            this.BusinessPointPic.setImage(newBP.getImg());
+        if (s instanceof User) {
+            User u = (User) s;
+            BusinessPoint newBP = null;
+            String tName = "";
+            String tLevel = "0";
+            String pLevel = "None";
+            String[] env = {};
+            String[] spe = {};
+            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
+            if (this.isArrive) {
+                newBP = u.getArrive();
+            } else {
+                newBP = u.getWantTo();
+            }
+            if (newBP != null) {
+                tName = newBP.getName();
+                tLevel = newBP.getStore().getMAX_GOODS_LEVEL() + "";
+                pLevel = newBP.getPointLevel();
+                env = newBP.getEnvironment();
+                spe = newBP.getStoreSpeciality();
+                icon = newBP.getImg();
+            }
+            this.townName.setText(tName);
+            this.townLevel.setText(tLevel);
+            this.pointLevel.setText(pLevel);
+
+            this.environmentList.clearItem();
+            this.specialityList.clearItem();
+            this.environmentList.addItem(env);
+            this.specialityList.addItem(spe);
+            this.BusinessPointPic.setImage(icon);
             //this.weatherPic.setImage();
         }
+        this.repaint();
+        this.revalidate();
     }
 }

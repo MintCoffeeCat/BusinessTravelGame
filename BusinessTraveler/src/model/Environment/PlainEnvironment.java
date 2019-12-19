@@ -17,12 +17,10 @@ public class PlainEnvironment extends Environment {
     
     public PlainEnvironment() {
         super();
-        this.init();
     }
 
     public PlainEnvironment(EnvironmentInfluencable s) {
         super(s);
-        this.init();
     }
 
     public void init() {

@@ -10,20 +10,28 @@ import javax.swing.JFrame;
 import model.BusinessPoint.BusinessPoint;
 import model.Environment.ForestEnvironment;
 import model.Environment.PlainEnvironment;
+import model.User.User;
 import view.MainFrame;
-
 
 /**
  *
  * @author Yun_c
  */
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
         MainFrame jf = new MainFrame();
         BusinessPointFactory bfct = new BusinessPointFactory();
         BusinessPoint bf = bfct.getBusinessPoint(1);
+        User u = new User("Alice");
         bf.generateEnvironment(new PlainEnvironment(new ForestEnvironment(bf.getStore())));
-        bf.attach(jf.getBusinessPointPanel());
+        u.attach(jf.getNowBusinessPoint());
+        u.attach(jf.getDestinationPoint());
         jf.setVisible(true);
+        Thread.sleep(1000);
+        u.changeTravelDestination(bf);
+        Thread.sleep(1000);
+        u.travel();
+        
     }
 }

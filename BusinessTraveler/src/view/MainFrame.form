@@ -27,23 +27,29 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="businessPointPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="773" max="32767" attributes="0"/>
+              <Component id="nowBusinessPoint" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="474" max="32767" attributes="0"/>
+              <Component id="destinationPoint" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-              <Component id="businessPointPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="147" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="destinationPoint" min="-2" max="-2" attributes="0"/>
+                  <Component id="nowBusinessPoint" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="component.BusinessPointPanel" name="businessPointPanel">
+    <Component class="component.BusinessPointPanel" name="nowBusinessPoint">
+    </Component>
+    <Component class="component.BusinessPointPanel" name="destinationPoint">
     </Component>
   </SubComponents>
 </Form>

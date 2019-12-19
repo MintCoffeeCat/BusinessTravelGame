@@ -34,13 +34,15 @@ public abstract class Environment implements EnvironmentInfluencable {
 
     public Environment(EnvironmentInfluencable t) {
         this.target = t;
+        this.init();
         this.target.stageInfluence(this);
     }
 
     public Environment() {
 
     }
-
+    public abstract void init();
+    
     public void setTarget(EnvironmentInfluencable ei) {
         this.target = ei;
     }

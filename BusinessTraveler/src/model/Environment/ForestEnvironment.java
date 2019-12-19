@@ -8,6 +8,7 @@ package model.Environment;
 import model.Goods.Goods;
 import java.util.HashMap;
 import model.BusinessPoint.Store;
+import myinterface.EnvironmentInfluencable;
 
 /**
  *
@@ -15,14 +16,12 @@ import model.BusinessPoint.Store;
  */
 public class ForestEnvironment extends Environment {
     
-    public ForestEnvironment(Store s) {
+    public ForestEnvironment(EnvironmentInfluencable s) {
         super(s);
-        this.init();
     }
 
     public ForestEnvironment() {
         super();
-        this.init();
     }
 
     public void init() {

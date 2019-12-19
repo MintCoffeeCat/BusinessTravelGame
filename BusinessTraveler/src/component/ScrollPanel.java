@@ -90,16 +90,11 @@ public class ScrollPanel extends javax.swing.JPanel {
             listModel.addElement(s);
         }
         this.itemList.setModel(this.listModel);
-
-//        this.revalidate();
-//        this.repaint();
     }
 
     public void clearItem() {
         this.listModel.clear();
         this.itemList.setModel(this.listModel);
-//        this.revalidate();
-//        this.repaint();
     }
 
 }
