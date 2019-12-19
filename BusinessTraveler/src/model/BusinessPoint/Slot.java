@@ -11,7 +11,7 @@ import model.Goods.Goods;
  *
  * @author Yun_c
  */
-class Slot {
+public class Slot {
     
     private Goods good;
     private int num;

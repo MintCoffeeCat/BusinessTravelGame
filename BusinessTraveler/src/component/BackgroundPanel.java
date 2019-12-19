@@ -45,7 +45,7 @@ public class BackgroundPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     protected void paintComponent(Graphics g){
-        g.drawImage(this.icon.getImage(), 0, 0, null);
+        g.drawImage(this.icon.getImage(), 0, 0, this);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
