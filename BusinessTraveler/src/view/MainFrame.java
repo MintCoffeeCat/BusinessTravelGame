@@ -5,6 +5,7 @@
  */
 package view;
 
+import component.BasicInfoPanel;
 import component.BusinessPointPanel;
 
 /**
@@ -20,7 +21,6 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.nowBusinessPoint.setArrive(true);
         this.destinationPoint.setArrive(false);
-        
     }
 
     /**
@@ -34,6 +34,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         nowBusinessPoint = new component.BusinessPointPanel();
         destinationPoint = new component.BusinessPointPanel();
+        infoBar = new component.BasicInfoPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 768));
@@ -44,17 +45,21 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(nowBusinessPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(destinationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(infoBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(destinationPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nowBusinessPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(infoBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -97,6 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.BusinessPointPanel destinationPoint;
+    private component.BasicInfoPanel infoBar;
     private component.BusinessPointPanel nowBusinessPoint;
     // End of variables declaration//GEN-END:variables
     public BusinessPointPanel getNowBusinessPoint(){
@@ -105,5 +111,7 @@ public class MainFrame extends javax.swing.JFrame {
     public BusinessPointPanel getDestinationPoint(){
         return this.destinationPoint;
     }
-
+    public BasicInfoPanel getBasicInfoPanel(){
+        return this.infoBar;
+    }
 }

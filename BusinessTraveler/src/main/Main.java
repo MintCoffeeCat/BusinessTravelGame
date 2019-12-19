@@ -24,9 +24,12 @@ public class Main {
         BusinessPointFactory bfct = new BusinessPointFactory();
         BusinessPoint bf = bfct.getBusinessPoint(1);
         User u = new User("Alice");
+        u.setMax_energy(80);
+        u.setEnergy(60);
         bf.generateEnvironment(new PlainEnvironment(new ForestEnvironment(bf.getStore())));
         u.attach(jf.getNowBusinessPoint());
         u.attach(jf.getDestinationPoint());
+        u.attach(jf.getBasicInfoPanel());
         jf.setVisible(true);
         Thread.sleep(1000);
         u.changeTravelDestination(bf);
