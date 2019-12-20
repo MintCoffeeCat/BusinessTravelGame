@@ -24,7 +24,7 @@ import view.MainFrame;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        MainFrame jf = new MainFrame();
+
         BusinessPointFactory bfct = new BusinessPointFactory();
         WorldMap wMap = WorldMap.getInstance();
 
@@ -41,12 +41,12 @@ public class Main {
         d.generateEnvironment(new PlainEnvironment(d.getStore()));
         e.generateEnvironment(new PlainEnvironment(new ForestEnvironment(e.getStore())));
         f.generateEnvironment(new ForestEnvironment(f.getStore()));
-        
+
         Path pab = new Path(Path.PathType.DIRT, a, b, 10);
         Path pac = new Path(Path.PathType.DIRT, a, c, 8);
         Path pbc = new Path(Path.PathType.DIRT, b, c, 10);
         Path pcd = new Path(Path.PathType.GRASS, c, d, 8);
-        Path pde = new Path(Path.PathType.ROAD, c, d, 6);
+        Path pde = new Path(Path.PathType.ROAD, d, e, 6);
         Path pdf = new Path(Path.PathType.ROAD, d, f, 6);
 
         wMap.addPoint(a);
@@ -61,8 +61,10 @@ public class Main {
         wMap.addPath(pcd);
         wMap.addPath(pde);
         wMap.addPath(pdf);
+
+        MainFrame jf = new MainFrame();
         jf.getWorldMapPanel().initWorldMap(wMap.getAllPoints(), wMap.getAllPaths());
-        
+
         User u = User.getInstance();
         u.setName("Alice");
         u.setMax_energy(80);
@@ -71,7 +73,7 @@ public class Main {
         u.attach(jf.getNowBusinessPoint());
         u.attach(jf.getDestinationPoint());
         u.attach(jf.getBasicInfoPanel());
-        
+
         jf.setVisible(true);
 //        Thread.sleep(1000);
 //        u.changeTravelDestination(bf);

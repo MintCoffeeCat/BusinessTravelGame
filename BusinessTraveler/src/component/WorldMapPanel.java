@@ -6,7 +6,15 @@
 package component;
 
 import controller.MapDragController;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import javax.swing.JScrollPane;
 import model.BusinessPoint.BusinessPoint;
 import model.Path.Path;
 import model.WorldMap.WorldMap;
@@ -25,6 +33,23 @@ public class WorldMapPanel extends javax.swing.JPanel {
         this.jScrollPane1.addMouseMotionListener(new MapDragController());
     }
 
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+//        WorldMap wMap = WorldMap.getInstance();
+//        for (Path p : wMap.getAllPaths()) {
+//            BusinessPointOnMap tempA = this.businessPoints.get(p.getA().getId());
+//            BusinessPointOnMap tempB = this.businessPoints.get(p.getB().getId());
+//
+//            Graphics2D g2d = (Graphics2D) g.create();
+//            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//            BasicStroke bs1 = new BasicStroke(5);       // 笔画的轮廓（画笔宽度/线宽为5px）
+//            g2d.setStroke(bs1);
+//            g2d.setColor(p.getColor());
+//            g2d.drawLine(tempA.getX(), tempA.getY(), tempB.getX(), tempB.getY());
+//
+//        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,8 +59,8 @@ public class WorldMapPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new JScrollPane();
+        jPanel1 = new DrawablePanel();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -59,50 +84,52 @@ public class WorldMapPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private DrawablePanel jPanel1;
+    private JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    private BusinessPointOnMap[] businessPoints;
+//    private Map<Integer, BusinessPointOnMap> businessPoints;
 
     public void initWorldMap(BusinessPoint[] bps, Path[] paths) {
-        businessPoints = new BusinessPointOnMap[bps.length];
-        WorldMap wMap = WorldMap.getInstance();
-        int bpWidth = 50;
-        int bpHeight = 50;
-        int maxX = this.getParent().getWidth() - bpWidth;
-        int maxY = this.getParent().getHeight() - bpHeight;
-        Random rnd = new Random();
-        for (int i = 0; i < bps.length; i++) {
-            this.businessPoints[i] = new BusinessPointOnMap(bps[i]);
-            if (i == 0) {
-                this.businessPoints[i].setBounds(maxX / 2, maxY / 2, bpWidth, bpHeight);
-            } else {
-                boolean seperate = false;
-                int bp_x = 0;
-                int bp_y = 0;
-                while (!seperate) {
-                    boolean jump = false;
-                    bp_x = rnd.nextInt(maxX);
-                    bp_y = rnd.nextInt(maxY);
-                    for (int j = 0; j < i; j++) {
-                        if (bp_x > this.businessPoints[j].getX() + bpWidth + 50
-                                || bp_x + bpWidth < this.businessPoints[j].getX() - 50
-                                || bp_y > this.businessPoints[j].getY() + bpHeight + 50
-                                || bp_y + bpHeight < this.businessPoints[j].getY() - 50) {
-                        } else {
-                            jump = true;
-                            break;
-                        }
-                    }
-                    if (!jump) {
-                        seperate = true;
-                    }
-                }
-                this.businessPoints[i].setBounds(bp_x, bp_y, bpWidth, bpHeight);
-            }
-            this.jPanel1.add(this.businessPoints[i]);
-            wMap.attach(this.businessPoints[i]);
-        }
+        this.jPanel1.initWorldMap(bps, paths);
+//        businessPoints = new HashMap<Integer, BusinessPointOnMap>();
+//        WorldMap wMap = WorldMap.getInstance();
+//        int bpWidth = 50;
+//        int bpHeight = 50;
+//        int maxX = this.getParent().getWidth() - bpWidth;
+//        int maxY = this.getParent().getHeight() - bpHeight;
+//        Random rnd = new Random();
+//        for (int i = 0; i < bps.length; i++) {
+//            BusinessPointOnMap temp = new BusinessPointOnMap(bps[i]);
+//            this.businessPoints.put(temp.getId(), temp);
+//            if (i == 0) {
+//                temp.setBounds(maxX / 2, maxY / 2, bpWidth, bpHeight);
+//            } else {
+//                boolean seperate = false;
+//                int bp_x = 0;
+//                int bp_y = 0;
+//                while (!seperate) {
+//                    boolean jump = false;
+//                    bp_x = rnd.nextInt(maxX);
+//                    bp_y = rnd.nextInt(maxY);
+//                    for (BusinessPointOnMap bm : this.businessPoints.values()) {
+//                        if (bp_x > bm.getX() + bpWidth + 50
+//                                || bp_x + bpWidth < bm.getX() - 50
+//                                || bp_y > bm.getY() + bpHeight + 50
+//                                || bp_y + bpHeight < bm.getY() - 50) {
+//                        } else {
+//                            jump = true;
+//                            break;
+//                        }
+//                    }
+//                    if (!jump) {
+//                        seperate = true;
+//                    }
+//                }
+//                temp.setBounds(bp_x, bp_y, bpWidth, bpHeight);
+//            }
+//            this.jPanel1.add(temp);
+//            wMap.attach(temp);
+//        }
 
     }
 

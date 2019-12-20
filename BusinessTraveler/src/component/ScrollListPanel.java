@@ -13,12 +13,12 @@ import javax.swing.JLabel;
  *
  * @author Yun_c
  */
-public class ScrollPanel extends javax.swing.JPanel {
+public class ScrollListPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ScrollPanel
      */
-    public ScrollPanel() {
+    public ScrollListPanel() {
         initComponents();
     }
 

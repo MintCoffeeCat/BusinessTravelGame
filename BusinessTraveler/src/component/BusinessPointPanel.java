@@ -53,8 +53,8 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
         townLevel = new javax.swing.JLabel();
         speciality_pre = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        environmentList = new component.ScrollPanel();
-        specialityList = new component.ScrollPanel();
+        environmentList = new component.ScrollListPanel();
+        specialityList = new component.ScrollListPanel();
         pointLevel_pre = new javax.swing.JLabel();
         pointLevel = new javax.swing.JLabel();
         TradeButton = new javax.swing.JButton();
@@ -272,13 +272,13 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
     private javax.swing.JButton TradeButton;
     private component.BackgroundPanel backgroundPanel2;
     private component.BackgroundPanel backgroundPanel3;
-    private component.ScrollPanel environmentList;
+    private component.ScrollListPanel environmentList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel name;
     private javax.swing.JLabel pointLevel;
     private javax.swing.JLabel pointLevel_pre;
-    private component.ScrollPanel specialityList;
+    private component.ScrollListPanel specialityList;
     private javax.swing.JLabel speciality_pre;
     private javax.swing.JLabel townLevel;
     private javax.swing.JLabel townLevel_pre;

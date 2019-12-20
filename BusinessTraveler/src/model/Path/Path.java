@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package model.Path;
+import java.awt.Color;
 import model.BusinessPoint.BusinessPoint;
 
 /**
@@ -22,6 +23,7 @@ public class Path {
     private int weatherMoveCost;
     private BusinessPoint aPoint;
     private BusinessPoint bPoint;
+    private Color color;
 
     public Path(PathType tp, BusinessPoint a, BusinessPoint b, int cost) {
         this(tp, a, b);
@@ -35,10 +37,15 @@ public class Path {
         this.bPoint = b;
         this.type = type;
         this.weatherMoveCost = 0;
+        this.color = Color.BLACK;
     }
 
     public int getId() {
         return id;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public int getBaseMoveCost() {

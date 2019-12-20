@@ -46,7 +46,7 @@ public class BusinessPointOnMap extends BackgroundPanel implements Observer {
         if (this.chosen) {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            BasicStroke bs1 = new BasicStroke(5);       // 笔画的轮廓（画笔宽度/线宽为5px）
+            BasicStroke bs1 = new BasicStroke(5);      
             g2d.setStroke(bs1);
             g2d.setColor(Color.RED);
             g2d.drawLine(0, 0, 0, this.getHeight());
