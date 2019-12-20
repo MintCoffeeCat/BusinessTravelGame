@@ -5,6 +5,7 @@
  */
 package model.BusinessPoint;
 
+import model.Path.Path;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Set;
@@ -17,28 +18,44 @@ import myinterface.Subject;
  * @author Yun_c
  */
 public abstract class BusinessPoint implements Subject {
+
+    private static int NOW_ID = 0;
+    private final int id;
     protected ImageIcon img;
     protected String name;
     protected EnvironmentInfluencable store;
     protected Path path;
     protected String pointLevel;
-    
-    public BusinessPoint(){}
+
+    public int getId() {
+        return id;
+    }
+
+    public BusinessPoint() {
+        this.id = BusinessPoint.NOW_ID;
+        BusinessPoint.NOW_ID += 1;
+    }
+
     public BusinessPoint(String name, Store s) {
+        this.id = BusinessPoint.NOW_ID;
+        BusinessPoint.NOW_ID += 1;
         this.name = name;
         this.store = s;
         this.path = null;
     }
-    public String[] getEnvironment(){
+
+    public String[] getEnvironment() {
         Set<String> envs = this.store.getEnvironment();
         String[] envStr = new String[envs.size()];
-        return (String[])envs.toArray(envStr);
+        return (String[]) envs.toArray(envStr);
     }
-    public String[] getStoreSpeciality(){
+
+    public String[] getStoreSpeciality() {
         Set<String> spe = this.store.getSpeciality();
         String[] envStr = new String[spe.size()];
-        return (String[])spe.toArray(envStr);
+        return (String[]) spe.toArray(envStr);
     }
+
     public String getPointLevel() {
         return pointLevel;
     }
@@ -46,7 +63,7 @@ public abstract class BusinessPoint implements Subject {
     public ImageIcon getImg() {
         return img;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -56,7 +73,7 @@ public abstract class BusinessPoint implements Subject {
     }
 
     public Store getStore() {
-        return (Store)store.getOri();
+        return (Store) store.getOri();
     }
 
     public void setStore(Store store) {
@@ -73,9 +90,6 @@ public abstract class BusinessPoint implements Subject {
 
     public void generateEnvironment(EnvironmentInfluencable env) {
         this.store = env;
-        
+
     }
 }
-
-
-

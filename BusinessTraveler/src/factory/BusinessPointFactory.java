@@ -34,4 +34,10 @@ public class BusinessPointFactory {
         }
         return bp;
     }
+    
+    public BusinessPoint getBusinessPoint(int i, String name){
+        BusinessPoint bp = this.getBusinessPoint(i);
+        bp.setName(name);
+        return bp;
+    }
 }

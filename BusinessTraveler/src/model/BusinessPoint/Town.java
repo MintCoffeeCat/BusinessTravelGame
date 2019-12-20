@@ -5,6 +5,7 @@
  */
 package model.BusinessPoint;
 
+import javax.swing.ImageIcon;
 import model.BusinessPoint.BusinessPoint;
 
 /**
@@ -16,5 +17,6 @@ public class Town extends BusinessPoint {
         this.name = name;
         this.store = new Store(70,2);
         this.pointLevel = "Town";
+                this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/town.jpg"));
     } 
 }

@@ -12,15 +12,31 @@ import myinterface.Subject;
  *
  * @author Yun_c
  */
-public class User implements Subject{
+public class User implements Subject {
+
     private String name;
     private int money;
     private int energy;
     private int max_energy;
     private BusinessPoint arrive;
     private BusinessPoint wantTo;
-    
-    public User(String name){
+
+    private static class UserInner {
+
+        private static User u = new User();
+    }
+
+    public static User getInstance() {
+        return User.UserInner.u;
+    }
+
+    private User() {
+        this.name = "";
+        this.arrive = null;
+        this.wantTo = null;
+    }
+
+    private User(String name) {
         this.name = name;
         this.arrive = null;
         this.wantTo = null;
@@ -65,29 +81,32 @@ public class User implements Subject{
     public void setArrive(BusinessPoint arrive) {
         this.arrive = arrive;
     }
-    
+
     public BusinessPoint getWantTo() {
         return wantTo;
     }
-    
+
     public void setWantTo(BusinessPoint wantTo) {
         this.wantTo = wantTo;
     }
-    
-    public void changeTravelDestination(BusinessPoint dest){
-        if(dest == this.arrive || dest == this.wantTo)return;
+
+    public void changeTravelDestination(BusinessPoint dest) {
+        if (dest == this.arrive || dest == this.wantTo) {
+            return;
+        }
         this.wantTo = dest;
         this.notifyObserver();
     }
-    public void travel(){
+
+    public void travel() {
         /*
         
         Here write the energy cost when Path is implemented
         
-        */
+         */
         this.arrive = this.wantTo;
         this.setWantTo(null);
         this.notifyObserver();
     }
-    
+
 }

@@ -17,6 +17,6 @@ public class Village extends BusinessPoint {
         this.name = name;
         this.store = new Store(30,1);
         this.pointLevel = "Village";
-        this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/village.png"));
+        this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/village.jpg"));
     }
 }
