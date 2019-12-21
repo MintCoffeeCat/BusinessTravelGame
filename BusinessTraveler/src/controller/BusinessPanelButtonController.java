@@ -8,6 +8,7 @@ package controller;
 import component.Button;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import model.TimeHandler;
 import model.User.User;
 
 /**
@@ -24,6 +25,8 @@ public class BusinessPanelButtonController implements MouseListener {
             String type = bt.getText();
             if (type.equals("Travel")) {
                 User.getInstance().travel();
+            }else if(type.equals("Sleep")){
+                TimeHandler.getInstance().timePassBy();
             }
         }
     }

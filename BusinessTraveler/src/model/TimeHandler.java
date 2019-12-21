@@ -17,7 +17,7 @@ import myinterface.TimeInfluencable;
 public class TimeHandler implements TimeInfluencable, Subject {
 
     private ArrayList<TimeInfluencable> timeInfluencableData = new ArrayList<TimeInfluencable>();
-    private int days = 0;
+    private int days = 1;
 
     private static class TimeInner {
 

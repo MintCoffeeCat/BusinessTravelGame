@@ -124,6 +124,9 @@ public class WorldMap implements Subject {
             this.notifyObserver();
             return;
         }
+        if(this.nowId == bp.getId()){
+            return;
+        }
         this.lockId = bp.getId();
         this.notifyObserver();
     }

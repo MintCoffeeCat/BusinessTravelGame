@@ -16,7 +16,7 @@ public interface TimeInfluencable {
     
     public abstract void timePassBy();
 
-    default public void addToHandler() {
+    default public void addToTimeHandler() {
         TimeHandler.getInstance().add(this);
     }
 }

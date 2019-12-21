@@ -8,12 +8,13 @@ package model.User;
 import model.BusinessPoint.BusinessPoint;
 import model.WorldMap.WorldMap;
 import myinterface.Subject;
+import myinterface.TimeInfluencable;
 
 /**
  *
  * @author Yun_c
  */
-public class User implements Subject {
+public class User implements Subject, TimeInfluencable  {
 
     private String name;
     private int money;
@@ -21,6 +22,12 @@ public class User implements Subject {
     private int max_energy;
 //    private BusinessPoint arrive;
 //    private BusinessPoint wantTo;
+
+    @Override
+    public void timePassBy() {
+        this.energy = this.max_energy;
+        this.notifyObserver();
+    }
 
     private static class UserInner {
 
@@ -32,15 +39,13 @@ public class User implements Subject {
     }
 
     private User() {
-        this.name = "";
-//        this.arrive = null;
-//        this.wantTo = null;
+        this.addToTimeHandler();
     }
 
     private User(String name) {
+        this();
         this.name = name;
-//        this.arrive = null;
-//        this.wantTo = null;
+
     }
 
     public String getName() {
