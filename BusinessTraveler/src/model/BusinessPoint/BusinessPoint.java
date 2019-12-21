@@ -10,6 +10,10 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.ImageIcon;
+import model.EnumType.EnumTypes.GoodsType;
+import model.Environment.Topography;
+import model.Environment.Weather;
+import model.EnumType.EnumTypes.TopographyType;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
 
@@ -24,7 +28,7 @@ public abstract class BusinessPoint implements Subject {
     protected ImageIcon img;
     protected String name;
     protected EnvironmentInfluencable store;
-    protected Path path;
+    protected EnvironmentInfluencable path;
     protected String pointLevel;
 
     public int getId() {
@@ -44,16 +48,16 @@ public abstract class BusinessPoint implements Subject {
         this.path = null;
     }
 
-    public String[] getEnvironment() {
-        Set<String> envs = this.store.getEnvironment();
-        String[] envStr = new String[envs.size()];
-        return (String[]) envs.toArray(envStr);
+    public TopographyType[] getTopography() {
+        Set<TopographyType> topo = this.store.getEnvironment();
+        TopographyType[] envStr = new TopographyType[topo.size()];
+        return (TopographyType[]) topo.toArray(envStr);
     }
 
-    public String[] getStoreSpeciality() {
-        Set<String> spe = this.store.getSpeciality();
-        String[] envStr = new String[spe.size()];
-        return (String[]) spe.toArray(envStr);
+    public GoodsType[] getStoreSpeciality() {
+        Set<GoodsType> spe = this.store.getSpeciality();
+        GoodsType[] envStr = new GoodsType[spe.size()];
+        return (GoodsType[]) spe.toArray(envStr);
     }
 
     public String getPointLevel() {
@@ -81,15 +85,18 @@ public abstract class BusinessPoint implements Subject {
     }
 
     public Path getPath() {
-        return path;
+        return (Path) path.getOri();
     }
 
     public void setPath(Path path) {
         this.path = path;
     }
 
-    public void generateEnvironment(EnvironmentInfluencable env) {
+    public void generateTopography(Topography env) {
         this.store = env;
+    }
 
+    public void generateWeather(Weather wth) {
+        this.path = wth;
     }
 }

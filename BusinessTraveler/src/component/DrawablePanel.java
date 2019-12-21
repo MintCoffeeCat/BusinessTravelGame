@@ -51,12 +51,15 @@ public class DrawablePanel extends JPanel {
             int endY = 0;
             if ((((aY < bY + tempB.getHeight()) && aY > bY) || ((aY + tempA.getHeight() > bY) && aY < bY))
                     && ((aX > bX + tempB.getWidth()) || (aX + tempA.getWidth() < bX))) {
+                
                 startX = aX > bX ? bX + tempB.getWidth() : aX + tempA.getWidth();
                 endX = aX > bX ? aX : bX;
                 startY = aX > bX ? (bY + bY + tempB.getHeight()) / 2 : (aY + aY + tempA.getHeight()) / 2;
-                endY = aX > bX ? (aY + aY + tempB.getHeight()) / 2 : (bY + bY + tempB.getHeight()) / 2;
+                endY = aX > bX ? (aY + aY + tempA.getHeight()) / 2 : (bY + bY + tempB.getHeight()) / 2;
+                
             } else if ((((aX < bX + tempB.getWidth()) && aX > bX) || ((aX + tempA.getWidth() > bX) && aX < bX))
                     && ((aY > bY + tempB.getHeight()) || (aY + tempA.getHeight() < bY))) {
+                
                 startX = aY > bY ? (bX + bX + tempB.getWidth()) / 2 : (aX + aX + tempA.getWidth()) / 2;
                 endX = aY > bY ? (aX + aX + tempA.getWidth()) / 2 : (bX + bX + tempB.getWidth()) / 2;
                 startY = aY > bY ? bY + tempB.getHeight() : aY + tempA.getHeight();

@@ -6,14 +6,14 @@
 package model.Goods;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
-
+import model.EnumType.EnumTypes.GoodsType;
 /**
  *
  * @author Yun_c
  */
 public abstract class Goods implements Subject {
 
-    private TypeNode type;
+    private GoodsType type;
     private int pricePerKg;
     private int level;
     private String name;
@@ -44,11 +44,11 @@ public abstract class Goods implements Subject {
         this.level = level;
     }
 
-    public TypeNode getType() {
+    public GoodsType getType() {
         return type;
     }
 
-    public void setType(TypeNode type) {
+    public void setType(GoodsType type) {
         this.type = type;
     }
 

@@ -8,6 +8,8 @@ package component;
 import javax.swing.ImageIcon;
 import model.BusinessPoint.BusinessPoint;
 import model.BusinessPoint.Store;
+import model.EnumType.EnumTypes.GoodsType;
+import model.EnumType.EnumTypes.TopographyType;
 import model.User.User;
 import myinterface.Observer;
 import myinterface.Subject;
@@ -296,8 +298,8 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
             String tName = "";
             String tLevel = "0";
             String pLevel = "None";
-            String[] env = {};
-            String[] spe = {};
+            TopographyType[] env = {};
+            GoodsType[] spe = {};
             ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
             if (this.isArrive) {
                 newBP = u.getArrive();
@@ -308,7 +310,7 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
                 tName = newBP.getName();
                 tLevel = newBP.getStore().getMAX_GOODS_LEVEL() + "";
                 pLevel = newBP.getPointLevel();
-                env = newBP.getEnvironment();
+                env = newBP.getTopography();
                 spe = newBP.getStoreSpeciality();
                 icon = newBP.getImg();
             }

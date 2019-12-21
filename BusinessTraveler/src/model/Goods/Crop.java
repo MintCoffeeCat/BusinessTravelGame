@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package model.Goods;
-import model.Goods.GoodsType;
+import model.EnumType.EnumTypes.GoodsType;
 import model.Goods.Goods;
 import myinterface.TimeInfluencable;
 
@@ -34,7 +34,7 @@ public abstract class Crop extends Goods implements TimeInfluencable{
         super.setPrice(0);
         this.setName(name);
         this.setLevel(level);
-        this.setType(GoodsType.get("crop"));
+        this.setType(GoodsType.CROP);
         this.rotTime = rotTime;
         this.rot = false;
     }

@@ -69,25 +69,25 @@ public class ScrollListPanel extends javax.swing.JPanel {
 
     private DefaultListModel listModel = new DefaultListModel();
 
-    public void addItem(String... str) {
+    public void addItem(Object... str) {
         if (str == null) {
             return;
         }
 
-        for (String s : str) {
-            listModel.addElement(s);
+        for (Object s : str) {
+            listModel.addElement(s.toString());
         }
         this.itemList.setModel(this.listModel);
 //        this.revalidate();
 //        this.repaint();
     }
 
-    public void addItem(ArrayList<String> str) {
+    public void addItem(ArrayList<Object> str) {
         if (str == null) {
             return;
         }
-        for (String s : str) {
-            listModel.addElement(s);
+        for (Object s : str) {
+            listModel.addElement(s.toString());
         }
         this.itemList.setModel(this.listModel);
     }

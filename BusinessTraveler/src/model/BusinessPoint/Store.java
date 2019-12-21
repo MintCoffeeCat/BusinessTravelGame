@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import model.Environment.Environment;
+import model.EnumType.EnumTypes.GoodsType;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Observer;
 import myinterface.Subject;
@@ -21,31 +22,31 @@ import myinterface.Tradable;
  *
  * @author Yun_c
  */
-public class Store implements Tradable, Subject, EnvironmentInfluencable {
+public class Store implements Tradable, Subject, EnvironmentInfluencable<GoodsType, Environment> {
 
     private final int MAX_GOODS_NUM;
     private final int MAX_GOODS_LEVEL;
-    private Map<String, Integer> additionalLevel;
+    private Map<GoodsType, Integer> additionalLevel;
     private ArrayList<Slot> slots;
 
     public Store() {
         this.MAX_GOODS_NUM = 0;
         this.MAX_GOODS_LEVEL = 0;
-        this.additionalLevel = new HashMap<String, Integer>();
+        this.additionalLevel = new HashMap<GoodsType, Integer>();
     }
 
     public Store(int max_num, int max_level) {
         this.MAX_GOODS_NUM = max_num;
         this.MAX_GOODS_LEVEL = max_level;
-        this.additionalLevel = new HashMap<String, Integer>();
+        this.additionalLevel = new HashMap<GoodsType, Integer>();
     }
 
-    public Map<String, Integer> getAdditionalLevel() {
+    public Map<GoodsType, Integer> getAdditionalLevel() {
         return additionalLevel;
     }
 
     public void stageInfluence(Environment e) {
-        Set<String> envSpe = e.getSpeciality();
+        Set<GoodsType> envSpe = e.getSpeciality();
         envSpe.forEach((item) -> {
             Integer lv = this.additionalLevel.get(item);
             if (lv == null) {
@@ -70,7 +71,7 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
     }
 
     public void addGoods(Goods g, int num) {
-        Integer addLv = this.additionalLevel.get(g.getType().getTypeName());
+        Integer addLv = this.additionalLevel.get(g.getType());
         if (addLv == null) {
             addLv = 0;
         }
@@ -119,13 +120,12 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable {
     }
 
     @Override
-    public double calculateInfluence(EnvironmentInfluencable ev, Map<String, Double> influenceList) {
-        if (!(ev instanceof Goods)) {
-            return 0;
-        }
-        Goods good = (Goods) (ev);
-        String typeName = good.getType().getTypeName();
-        return good.getPricePerKg() * influenceList.get(typeName);
+    public  Map<GoodsType, Double> calculateInfluence(Map<GoodsType, Double> influenceList) {
+        return influenceList;
+    }
+    
+    @Override
+    public double superpositionSolution(Double a, Double b) {
+        return a * b;
     }
 }
-

@@ -6,7 +6,7 @@
 package model.Goods;
 
 import model.Goods.Crop;
-import model.Goods.GoodsType;
+import model.EnumType.EnumTypes.GoodsType;
 
 /**
  *
@@ -19,14 +19,14 @@ public class Fruit extends Crop {
 
     public Fruit(String name, int rotTime, int level, double e_w, double p_w) {
         super(name, rotTime, level);
-        super.setType(GoodsType.get("fruit"));
+        super.setType(GoodsType.FRUIT);
         this.eatableWeight = e_w;
         this.pitWeight = p_w;
     }
 
     public Fruit(String name, int rotTime, int level) {
         super(name, rotTime, level);
-        super.setType(GoodsType.get("fruit"));
+        super.setType(GoodsType.FRUIT);
         this.eatableWeight = 0;
         this.pitWeight = 0;
     }

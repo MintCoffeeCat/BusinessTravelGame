@@ -13,24 +13,21 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import model.EnumType.Couple;
+import model.EnumType.EnumTypes.TopographyType;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Tradable;
 
 /**
+ * K is the type of object this environment would influence. E is the
+ * environment type, such as Topography or Weather.
  *
  * @author Yun_c
  */
-public abstract class Environment implements EnvironmentInfluencable {
+public abstract class Environment<K, E> implements EnvironmentInfluencable<K, E> {
 
-    protected static final ArrayList<String> AVAILABLE_ENVIRONMENT = new ArrayList<String>() {
-        {
-            add("Plain");
-            add("Mountain");
-            add("Forest");
-        }
-    };
     protected EnvironmentInfluencable target;
-    protected Map<String, Double> influence;
+    protected Map<K, Double> influence;
 
     public Environment(EnvironmentInfluencable t) {
         this.target = t;
@@ -41,44 +38,61 @@ public abstract class Environment implements EnvironmentInfluencable {
     public Environment() {
 
     }
+
     public abstract void init();
-    
+
+    public abstract E getEnvironmentType();
+
+    public void addInfluence(Couple<K, Double>... et) {
+        if (this.influence == null) {
+            this.influence = new HashMap<K, Double>();
+        }
+        for (Couple<K,Double> c : et) {
+           this.influence.put(c.getKey(), c.getValue());
+        }
+    }
+
     public void setTarget(EnvironmentInfluencable ei) {
         this.target = ei;
     }
 
-    public Set<String> getEnvironment() {
-        Set<String> envs = new HashSet<String>();
-        envs.add(this.toString());
+    public Set<E> getEnvironment() {
+        Set<E> envs = new HashSet<E>();
+        envs.add(this.getEnvironmentType());
         envs.addAll(this.target.getEnvironment());
         return envs;
     }
 
-
-    public Set<String> getSpeciality() {
-        Set<String> speciality = new HashSet<String>();
+    public Set<K> getSpeciality() {
+        Set<K> speciality = new HashSet<K>();
         speciality.addAll(this.influence.keySet());
         speciality.addAll(this.target.getSpeciality());
         return speciality;
     }
 
-    public double calculateInfluence(EnvironmentInfluencable ev, Map<String, Double> influenceList) {
+    @Override
+    public Map<K, Double> calculateInfluence() {
+        Map<K, Double> influenceList = new HashMap<>();
+        return this.calculateInfluence(influenceList);
+    }
+
+    @Override
+    public Map<K, Double> calculateInfluence(Map<K, Double> influenceList) {
         this.influence.entrySet().forEach((item) -> {
-            String inf_name = item.getKey();
+            K inf_type = item.getKey();
             Double inf_value = item.getValue();
-            Double ori_value = influenceList.get(inf_name);
+            Double ori_value = influenceList.get(inf_type);
             if (ori_value != null) {
-                influenceList.put(inf_name, inf_value * ori_value);
+                influenceList.put(inf_type, inf_value * ori_value);
             } else {
-                influenceList.put(inf_name, inf_value);
+                influenceList.put(inf_type, inf_value);
             }
         });
-
-        return this.target.calculateInfluence(ev, influenceList);
+        return this.target.calculateInfluence(influenceList);
     }
-    
+
     @Override
-    public Object getOri(){
+    public Object getOri() {
         return this.target.getOri();
     }
 }

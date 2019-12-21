@@ -6,7 +6,7 @@
 package model.Goods;
 
 import model.Goods.Crop;
-import model.Goods.GoodsType;
+import model.EnumType.EnumTypes.GoodsType;
 
 /**
  *
@@ -18,13 +18,13 @@ public class Grain extends Crop {
 
     public Grain(String name, int rotTime, int level, double weight) {
         super(name, rotTime, level);
-        super.setType(GoodsType.get("grain"));
+        super.setType(GoodsType.GRAIN);
         this.weight = weight;
     }
 
     public Grain(String name, int rotTime, int level) {
         super(name, rotTime, level);
-        super.setType(GoodsType.get("grain"));
+        super.setType(GoodsType.GRAIN);
         this.weight = 0;
     }
 

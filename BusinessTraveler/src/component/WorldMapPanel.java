@@ -91,46 +91,6 @@ public class WorldMapPanel extends javax.swing.JPanel {
 
     public void initWorldMap(BusinessPoint[] bps, Path[] paths) {
         this.jPanel1.initWorldMap(bps, paths);
-//        businessPoints = new HashMap<Integer, BusinessPointOnMap>();
-//        WorldMap wMap = WorldMap.getInstance();
-//        int bpWidth = 50;
-//        int bpHeight = 50;
-//        int maxX = this.getParent().getWidth() - bpWidth;
-//        int maxY = this.getParent().getHeight() - bpHeight;
-//        Random rnd = new Random();
-//        for (int i = 0; i < bps.length; i++) {
-//            BusinessPointOnMap temp = new BusinessPointOnMap(bps[i]);
-//            this.businessPoints.put(temp.getId(), temp);
-//            if (i == 0) {
-//                temp.setBounds(maxX / 2, maxY / 2, bpWidth, bpHeight);
-//            } else {
-//                boolean seperate = false;
-//                int bp_x = 0;
-//                int bp_y = 0;
-//                while (!seperate) {
-//                    boolean jump = false;
-//                    bp_x = rnd.nextInt(maxX);
-//                    bp_y = rnd.nextInt(maxY);
-//                    for (BusinessPointOnMap bm : this.businessPoints.values()) {
-//                        if (bp_x > bm.getX() + bpWidth + 50
-//                                || bp_x + bpWidth < bm.getX() - 50
-//                                || bp_y > bm.getY() + bpHeight + 50
-//                                || bp_y + bpHeight < bm.getY() - 50) {
-//                        } else {
-//                            jump = true;
-//                            break;
-//                        }
-//                    }
-//                    if (!jump) {
-//                        seperate = true;
-//                    }
-//                }
-//                temp.setBounds(bp_x, bp_y, bpWidth, bpHeight);
-//            }
-//            this.jPanel1.add(temp);
-//            wMap.attach(temp);
-//        }
-
     }
 
 }
