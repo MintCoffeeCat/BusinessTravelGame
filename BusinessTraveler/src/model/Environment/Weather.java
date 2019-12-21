@@ -21,10 +21,15 @@ public class Weather<K> extends Environment<K, WeatherType> {
     protected WeatherType weatherType;
     protected ImageIcon img;
 
-    public Weather(EnvironmentInfluencable t, WeatherType type, ImageIcon icon) {
+    public Weather(WeatherType type, String icon) {
+        this.weatherType = type;
+        this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/" + icon));
+    }
+
+    public Weather(EnvironmentInfluencable t, WeatherType type, String icon) {
         super(t);
         this.weatherType = type;
-        this.img = icon;
+        this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/" + icon));
     }
 
     public void init() {

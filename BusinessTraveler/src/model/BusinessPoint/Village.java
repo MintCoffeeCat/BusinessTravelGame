@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class Village extends BusinessPoint {
     public Village(String name){
         this.name = name;
-        this.store = new Store(30,1);
+        this.setStore(new Store(30, 1));
         this.pointLevel = "Village";
         this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/village.jpg"));
     }

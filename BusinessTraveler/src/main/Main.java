@@ -38,12 +38,12 @@ public class Main {
         BusinessPoint e = bfct.getBusinessPoint(3, "city E", 520, 100);
         BusinessPoint f = bfct.getBusinessPoint(3, "city F", 680, 400);
 
-        a.generateTopography(new Plain(new Mountain(a.getStore())));
-        b.generateTopography(new Mountain(new Forest(b.getStore())));
-        c.generateTopography(new Forest(c.getStore()));
-        d.generateTopography(new Plain(d.getStore()));
-        e.generateTopography(new Plain(new Forest(e.getStore())));
-        f.generateTopography(new Mountain(f.getStore()));
+        a.generateTopography(new Plain(new Mountain()));
+        b.generateTopography(new Mountain(new Forest()));
+        c.generateTopography(new Forest());
+        d.generateTopography(new Plain());
+        e.generateTopography(new Plain(new Forest()));
+        f.generateTopography(new Mountain());
 
         Path pab = new Path(PathType.DIRT, a, b, 10);
         Path pac = new Path(PathType.DIRT, a, c, 8);

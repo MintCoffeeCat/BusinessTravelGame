@@ -14,6 +14,7 @@ import model.EnumType.EnumTypes.GoodsType;
 import model.Environment.Topography;
 import model.Environment.Weather;
 import model.EnumType.EnumTypes.TopographyType;
+import model.Environment.Environment;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
 
@@ -29,8 +30,8 @@ public abstract class BusinessPoint implements Subject {
     protected int y;
     protected ImageIcon img;
     protected String name;
-    protected EnvironmentInfluencable store;
-    protected EnvironmentInfluencable path;
+    protected EnvironmentInfluencable topographys;
+    protected EnvironmentInfluencable weather;
     protected String pointLevel;
 
     public int getId() {
@@ -42,22 +43,18 @@ public abstract class BusinessPoint implements Subject {
         BusinessPoint.NOW_ID += 1;
     }
 
-    public BusinessPoint(String name, Store s) {
+    public BusinessPoint(String name) {
         this.id = BusinessPoint.NOW_ID;
         BusinessPoint.NOW_ID += 1;
         this.name = name;
-        this.store = s;
-        this.path = null;
         this.x = -1;
         this.y = -1;
     }
 
-    public BusinessPoint(String name, Store s, int x, int y) {
+    public BusinessPoint(String name, int x, int y) {
         this.id = BusinessPoint.NOW_ID;
         BusinessPoint.NOW_ID += 1;
         this.name = name;
-        this.store = s;
-        this.path = null;
         this.x = x;
         this.y = y;
     }
@@ -71,13 +68,13 @@ public abstract class BusinessPoint implements Subject {
     }
 
     public TopographyType[] getTopography() {
-        Set<TopographyType> topo = this.store.getEnvironment();
+        Set<TopographyType> topo = this.topographys.getEnvironment();
         TopographyType[] envStr = new TopographyType[topo.size()];
         return (TopographyType[]) topo.toArray(envStr);
     }
 
     public GoodsType[] getStoreSpeciality() {
-        Set<GoodsType> spe = this.store.getSpeciality();
+        Set<GoodsType> spe = this.topographys.getSpeciality();
         GoodsType[] envStr = new GoodsType[spe.size()];
         return (GoodsType[]) spe.toArray(envStr);
     }
@@ -99,19 +96,36 @@ public abstract class BusinessPoint implements Subject {
     }
 
     public Store getStore() {
-        return (Store) store.getOri();
+        if (topographys == null) {
+            return null;
+        }
+        if (topographys.getOri() instanceof Environment) {
+            return null;
+        }
+        return (Store) topographys.getOri();
     }
 
     public void setStore(Store store) {
-        this.store = store;
+        if (this.topographys == null || this.topographys instanceof Store) {
+            this.topographys = store;
+        } else if (this.topographys instanceof Topography) {
+            ((Environment) this.topographys).setTarget(store);
+        }
+
     }
 
     public Path getPath() {
-        return (Path) path.getOri();
+        if (weather == null) {
+            return null;
+        }
+        if (weather.getOri() instanceof Environment) {
+            return null;
+        }
+        return (Path) weather.getOri();
     }
 
-    public void setPath(Path path) {
-        this.path = path;
+    public Weather getWeather() {
+        return (Weather)this.weather;
     }
 
     public void setX(int x) {
@@ -123,10 +137,13 @@ public abstract class BusinessPoint implements Subject {
     }
 
     public void generateTopography(Topography env) {
-        this.store = env;
+        this.topographys = env;
+        if (this.topographys.getOri() instanceof Store) {
+            ((Store) this.topographys.getOri()).stageInfluence((Environment) this.topographys);
+        }
     }
 
     public void generateWeather(Weather wth) {
-        this.path = wth;
+        this.weather = wth;
     }
 }

@@ -13,10 +13,11 @@ import model.BusinessPoint.BusinessPoint;
  * @author Yun_c
  */
 public class Town extends BusinessPoint {
-    public Town(String name){
+
+    public Town(String name) {
         this.name = name;
-        this.store = new Store(70,2);
+        this.setStore(new Store(70, 2));
         this.pointLevel = "Town";
-                this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/town.jpg"));
-    } 
+        this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/town.jpg"));
+    }
 }

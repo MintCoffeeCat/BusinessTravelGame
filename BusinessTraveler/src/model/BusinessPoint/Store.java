@@ -47,6 +47,7 @@ public class Store implements Tradable, Subject, EnvironmentInfluencable<GoodsTy
 
     public void stageInfluence(Environment e) {
         Set<GoodsType> envSpe = e.getSpeciality();
+        this.additionalLevel.clear();
         envSpe.forEach((item) -> {
             Integer lv = this.additionalLevel.get(item);
             if (lv == null) {

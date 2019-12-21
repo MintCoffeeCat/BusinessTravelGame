@@ -26,17 +26,16 @@ import myinterface.Tradable;
  */
 public abstract class Environment<K, E> implements EnvironmentInfluencable<K, E> {
 
-    protected EnvironmentInfluencable target;
-    protected Map<K, Double> influence;
+    protected EnvironmentInfluencable target = null;
+    protected Map<K, Double> influence = null;
 
     public Environment(EnvironmentInfluencable t) {
         this.target = t;
         this.init();
-        this.target.stageInfluence(this);
     }
 
     public Environment() {
-
+        this.init();
     }
 
     public abstract void init();
@@ -47,13 +46,18 @@ public abstract class Environment<K, E> implements EnvironmentInfluencable<K, E>
         if (this.influence == null) {
             this.influence = new HashMap<K, Double>();
         }
-        for (Couple<K,Double> c : et) {
-           this.influence.put(c.getKey(), c.getValue());
+        for (Couple<K, Double> c : et) {
+            this.influence.put(c.getKey(), c.getValue());
         }
     }
 
     public void setTarget(EnvironmentInfluencable ei) {
-        this.target = ei;
+        Environment temp = this;
+        while (temp.target instanceof Environment) {
+            temp = (Environment) temp.target;
+        }
+        temp.target = ei;
+        temp.target.stageInfluence(this);
     }
 
     public Set<E> getEnvironment() {
@@ -93,6 +97,7 @@ public abstract class Environment<K, E> implements EnvironmentInfluencable<K, E>
 
     @Override
     public Object getOri() {
+        if(this.target == null)return this;
         return this.target.getOri();
     }
 }

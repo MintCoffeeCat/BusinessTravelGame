@@ -10,6 +10,5 @@ package myinterface;
  * @author Yun_c
  */
 public interface Observer {
-    
     public abstract void update(Subject s);
 }

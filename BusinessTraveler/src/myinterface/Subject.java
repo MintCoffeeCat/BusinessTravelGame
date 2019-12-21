@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public interface Subject {
     public ArrayList<Observer> observer = new ArrayList<Observer>();
-    
     default public void attach(Observer o){
         this.observer.add(o);
     }
