@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import model.WorldMap.WorldMap;
 
 /**
  *
@@ -52,12 +53,12 @@ public class MapDragController implements MouseMotionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        WorldMap.getInstance().setLocked(null);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("press");
+
     }
 
     @Override

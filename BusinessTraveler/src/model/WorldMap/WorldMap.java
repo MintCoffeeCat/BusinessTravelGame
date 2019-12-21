@@ -19,6 +19,9 @@ import myinterface.Subject;
 public class WorldMap implements Subject {
 
     private int chosenId;
+    private int nowId;
+    private int lockId;
+
     private Map<Integer, BusinessPoint> points;
     private Map<Integer, Path> paths;
 
@@ -30,6 +33,9 @@ public class WorldMap implements Subject {
     private WorldMap() {
         this.paths = new HashMap<Integer, Path>();
         this.points = new HashMap<Integer, BusinessPoint>();
+        this.chosenId = -1;
+        this.nowId = -1;
+        this.lockId = -1;
     }
 
     public static WorldMap getInstance() {
@@ -70,16 +76,58 @@ public class WorldMap implements Subject {
     public BusinessPoint getPoint(int id) {
         return points.get(id);
     }
-    public BusinessPoint getChosen(){
-        
-        if (this.chosenId < 0)return null;
+
+    public BusinessPoint getChosen() {
+
+        if (this.chosenId < 0) {
+            return null;
+        }
         return this.getPoint(this.chosenId);
-        
+
     }
-    public void setChosen(BusinessPoint bp){
-        this.chosenId = bp.getId();
+
+    public BusinessPoint getNowArrive() {
+        if (this.nowId < 0) {
+            return null;
+        }
+        return this.getPoint(this.nowId);
+    }
+
+    public BusinessPoint getLocked() {
+        if (this.lockId < 0) {
+            return null;
+        }
+        return this.getPoint(this.lockId);
+    }
+
+    public void setChosen(BusinessPoint bp) {
+        if (bp != null && this.nowId != bp.getId()) {
+            this.chosenId = bp.getId();
+        }
+        if (bp == null) {
+            this.chosenId = -1;
+        }
         this.notifyObserver();
     }
+
+    public void setArrival(BusinessPoint bp) {
+        if (bp == null) {
+            return;
+        }
+        this.nowId = bp.getId();
+        this.notifyObserver();
+    }
+
+    public void setLocked(BusinessPoint bp) {
+        if (bp == null) {
+            this.lockId = -1;
+            this.notifyObserver();
+            return;
+        }
+        this.lockId = bp.getId();
+        this.notifyObserver();
+    }
+
     public Path getPath(int id) {
         return paths.get(id);
     }

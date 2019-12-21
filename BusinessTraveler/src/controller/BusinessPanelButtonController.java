@@ -5,25 +5,27 @@
  */
 package controller;
 
-import component.BusinessPointOnMap;
+import component.Button;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import model.BusinessPoint.BusinessPoint;
 import model.User.User;
-import model.WorldMap.WorldMap;
 
 /**
  *
  * @author Yun_c
  */
-public class ChoosePointController implements MouseListener {
+public class BusinessPanelButtonController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        BusinessPointOnMap bpm = (BusinessPointOnMap) e.getSource();
-        WorldMap wMap = WorldMap.getInstance();
-        BusinessPoint bp = wMap.getPoint(bpm.getId());
-        wMap.setLocked(bp);
+        Object o = e.getSource();
+        if (o instanceof Button) {
+            Button bt = (Button) o;
+            String type = bt.getText();
+            if (type.equals("Travel")) {
+                User.getInstance().travel();
+            }
+        }
     }
 
     @Override
@@ -38,14 +40,11 @@ public class ChoosePointController implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        BusinessPointOnMap bpm = (BusinessPointOnMap) e.getSource();
-        WorldMap wMap = WorldMap.getInstance();
-        BusinessPoint bp = wMap.getPoint(bpm.getId());
-        wMap.setChosen(bp);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
 
     }
+
 }

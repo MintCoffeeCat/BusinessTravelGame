@@ -5,6 +5,7 @@
  */
 package component;
 
+import model.TimeHandler;
 import model.User.User;
 import myinterface.Observer;
 import myinterface.Subject;
@@ -160,26 +161,27 @@ public class BasicInfoPanel extends javax.swing.JPanel implements Observer {
     private javax.swing.JLabel moneyPre;
     private javax.swing.JLabel slice;
     // End of variables declaration//GEN-END:variables
-    public Button getBag(){
+    public Button getBag() {
         return this.bagButton;
     }
 
     @Override
     public void update(Subject s) {
         User u = null;
-        if(!(s instanceof User)){
-            return;
+        if (s instanceof User) {
+            u = (User) s;
+            int eng = u.getEnergy();
+            int engMax = u.getMax_energy();
+            int mn = u.getMoney();
+            this.energyBar.setMaximum(engMax);
+            this.energyBar.setValue(eng);
+            this.money.setText(mn + "");
+            this.energy.setText(eng + "");
+            this.maxEnergy.setText(engMax + "");
+        }else if (s instanceof TimeHandler){
+            this.day.setText(TimeHandler.getInstance().getDays()+"");
         }
-        
-        u = (User)s;
-        int eng = u.getEnergy();
-        int engMax = u.getMax_energy();
-        int mn = u.getMoney();
-        this.energyBar.setMaximum(engMax);
-        this.energyBar.setValue(eng);
-        this.money.setText(mn+"");
-        this.energy.setText(eng+"");
-        this.maxEnergy.setText(engMax+"");
+
     }
 
 }

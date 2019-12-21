@@ -6,30 +6,42 @@
 package model;
 
 import java.util.ArrayList;
+import myinterface.Observer;
+import myinterface.Subject;
 import myinterface.TimeInfluencable;
 
 /**
  *
  * @author Yun_c
  */
-public class TimeHandler implements TimeInfluencable{
-    private static ArrayList<TimeInfluencable> timeInfluencableData = new ArrayList<TimeInfluencable>();
-    private TimeHandler hdl;
-    public TimeHandler getInstance(){
-        if (this.hdl == null) {
-            synchronized(this) {
-                this.hdl = new TimeHandler();
-            }
-        }
-        return this.hdl;
+public class TimeHandler implements TimeInfluencable, Subject {
+
+    private ArrayList<TimeInfluencable> timeInfluencableData = new ArrayList<TimeInfluencable>();
+    private int days = 0;
+
+    private static class TimeInner {
+
+        private static TimeHandler t = new TimeHandler();
     }
-    public static void add(TimeInfluencable t){
-        TimeHandler.timeInfluencableData.add(t);
+
+    public static TimeHandler getInstance() {
+        return TimeHandler.TimeInner.t;
     }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void add(TimeInfluencable t) {
+        this.timeInfluencableData.add(t);
+    }
+
     public void timePassBy() {
-       for(TimeInfluencable t : TimeHandler.timeInfluencableData){
-           t.timePassBy();
-       }
+        this.days += 1;
+        for (TimeInfluencable t : this.timeInfluencableData) {
+            t.timePassBy();
+        }
+        this.notifyObserver();
     }
-    
+
 }

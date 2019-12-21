@@ -31,23 +31,11 @@ public class WorldMapPanel extends javax.swing.JPanel {
     public WorldMapPanel() {
         initComponents();
         this.jScrollPane1.addMouseMotionListener(new MapDragController());
+        this.jScrollPane1.addMouseListener(new MapDragController());
     }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        WorldMap wMap = WorldMap.getInstance();
-//        for (Path p : wMap.getAllPaths()) {
-//            BusinessPointOnMap tempA = this.businessPoints.get(p.getA().getId());
-//            BusinessPointOnMap tempB = this.businessPoints.get(p.getB().getId());
-//
-//            Graphics2D g2d = (Graphics2D) g.create();
-//            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//            BasicStroke bs1 = new BasicStroke(5);       // 笔画的轮廓（画笔宽度/线宽为5px）
-//            g2d.setStroke(bs1);
-//            g2d.setColor(p.getColor());
-//            g2d.drawLine(tempA.getX(), tempA.getY(), tempB.getX(), tempB.getY());
-//
-//        }
     }
 
     /**
@@ -92,5 +80,7 @@ public class WorldMapPanel extends javax.swing.JPanel {
     public void initWorldMap(BusinessPoint[] bps, Path[] paths) {
         this.jPanel1.initWorldMap(bps, paths);
     }
-
+    public DrawablePanel getMap(){
+        return jPanel1;
+    }
 }

@@ -5,12 +5,14 @@
  */
 package component;
 
+import controller.BusinessPanelButtonController;
 import javax.swing.ImageIcon;
 import model.BusinessPoint.BusinessPoint;
 import model.BusinessPoint.Store;
 import model.EnumType.EnumTypes.GoodsType;
 import model.EnumType.EnumTypes.TopographyType;
 import model.User.User;
+import model.WorldMap.WorldMap;
 import myinterface.Observer;
 import myinterface.Subject;
 
@@ -24,14 +26,18 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
      * Creates new form BusinessPointPanel
      */
     public BusinessPointPanel(boolean isArrive) {
+        this();
         this.isArrive = isArrive;
-        initComponents();
     }
 
     public BusinessPointPanel() {
         this.isArrive = true;
         initComponents();
         stateSetting();
+        this.travelButton.addMouseListener(new BusinessPanelButtonController());
+        this.tradeButton.addMouseListener(new BusinessPanelButtonController());
+        this.sleepButton.addMouseListener(new BusinessPanelButtonController());
+
     }
 
     public void setArrive(boolean b) {
@@ -59,13 +65,13 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
         specialityList = new component.ScrollListPanel();
         pointLevel_pre = new javax.swing.JLabel();
         pointLevel = new javax.swing.JLabel();
-        TradeButton = new javax.swing.JButton();
-        SleepButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         backgroundPanel3 = new component.BackgroundPanel();
         BusinessPointPic = new component.BackgroundPanel();
         weatherPic = new component.BackgroundPanel();
-        travelButton = new javax.swing.JButton();
+        tradeButton = new Button("Trade");
+        sleepButton = new Button("Sleep");
+        travelButton = new Button("Travel");
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
@@ -150,15 +156,6 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
 
         townName.getAccessibleContext().setAccessibleDescription("");
 
-        TradeButton.setText("Trade");
-
-        SleepButton.setText("Sleep");
-        SleepButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SleepButtonActionPerformed(evt);
-            }
-        });
-
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         BusinessPointPic.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
@@ -218,8 +215,6 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
             .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        travelButton.setText("Travel");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,10 +225,10 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(travelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SleepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sleepButton, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(tradeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(travelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
@@ -242,36 +237,30 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(TradeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SleepButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(travelButton)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(tradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sleepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(travelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SleepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SleepButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SleepButtonActionPerformed
 
     private void stateSetting() {
         if (this.isArrive) {
             this.travelButton.setEnabled(false);
-            this.SleepButton.setEnabled(true);
-            this.TradeButton.setEnabled(true);
+            this.sleepButton.setEnabled(true);
+            this.tradeButton.setEnabled(true);
         } else {
             this.travelButton.setEnabled(true);
-            this.SleepButton.setEnabled(false);
-            this.TradeButton.setEnabled(false);
+            this.sleepButton.setEnabled(false);
+            this.tradeButton.setEnabled(false);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.BackgroundPanel BusinessPointPic;
-    private javax.swing.JButton SleepButton;
-    private javax.swing.JButton TradeButton;
     private component.BackgroundPanel backgroundPanel2;
     private component.BackgroundPanel backgroundPanel3;
     private component.ScrollListPanel environmentList;
@@ -280,32 +269,36 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
     private javax.swing.JPanel name;
     private javax.swing.JLabel pointLevel;
     private javax.swing.JLabel pointLevel_pre;
+    private component.Button sleepButton;
     private component.ScrollListPanel specialityList;
     private javax.swing.JLabel speciality_pre;
     private javax.swing.JLabel townLevel;
     private javax.swing.JLabel townLevel_pre;
     private java.awt.Label townName;
-    private javax.swing.JButton travelButton;
+    private component.Button tradeButton;
+    private component.Button travelButton;
     private component.BackgroundPanel weatherPic;
     // End of variables declaration//GEN-END:variables
     private boolean isArrive;
 
     @Override
     public void update(Subject s) {
-        if (s instanceof User) {
-            User u = (User) s;
-            BusinessPoint newBP = null;
+        if (s instanceof WorldMap) {
+            BusinessPoint newBP = WorldMap.getInstance().getLocked();
             String tName = "";
-            String tLevel = "0";
-            String pLevel = "None";
+            String tLevel = "";
+            String pLevel = "";
             TopographyType[] env = {};
             GoodsType[] spe = {};
             ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
             if (this.isArrive) {
-                newBP = u.getArrive();
+                newBP = WorldMap.getInstance().getNowArrive();
             } else {
-                newBP = u.getWantTo();
+                if (newBP == null) {
+                    newBP = WorldMap.getInstance().getChosen();
+                }
             }
+
             if (newBP != null) {
                 tName = newBP.getName();
                 tLevel = newBP.getStore().getMAX_GOODS_LEVEL() + "";

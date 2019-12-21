@@ -25,12 +25,13 @@ public class BusinessPointOnMap extends BackgroundPanel implements Observer {
 
     private int id;
     private boolean chosen = false;
+    private boolean arrival = false;
+    private boolean locked = false;
 
     public BusinessPointOnMap(BusinessPoint bp) {
         super();
         String pointLevel = bp.getPointLevel();
         this.id = bp.getId();
-
         if (pointLevel.equals("Village")) {
             this.setImage(new ImageIcon(this.getClass().getClassLoader().getResource("img/village.jpg")));
         } else if (pointLevel.equals("Town")) {
@@ -43,18 +44,26 @@ public class BusinessPointOnMap extends BackgroundPanel implements Observer {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (this.chosen) {
+
+        if (this.chosen || this.arrival || this.locked) {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            BasicStroke bs1 = new BasicStroke(5);      
+            BasicStroke bs1 = new BasicStroke(5);
             g2d.setStroke(bs1);
-            g2d.setColor(Color.RED);
+            if (this.arrival) {
+                g2d.setColor(Color.GREEN);
+            } else if (this.locked) {
+                g2d.setColor(Color.YELLOW);
+            } else {
+                g2d.setColor(Color.RED);
+            }
+
             g2d.drawLine(0, 0, 0, this.getHeight());
             g2d.drawLine(0, 0, this.getWidth(), 0);
             g2d.drawLine(this.getWidth(), 0, this.getWidth(), this.getHeight());
             g2d.drawLine(0, this.getHeight(), this.getWidth(), this.getHeight());
-
         }
+
     }
 
     public int getId() {
@@ -65,13 +74,34 @@ public class BusinessPointOnMap extends BackgroundPanel implements Observer {
     public void update(Subject s) {
         if (s instanceof WorldMap) {
             WorldMap wMap = WorldMap.getInstance();
-            if (wMap.getChosen().getId() == this.id) {
+            BusinessPoint cho = wMap.getChosen();
+            BusinessPoint loc = wMap.getLocked();
+            BusinessPoint arr = wMap.getNowArrive();
+            if (arr != null && arr.getId() == this.id) {
+                this.arrival = true;
+                this.chosen = false;
+                this.locked = false;
+            } else {
+                this.arrival = false;
+            }
+
+            if (!this.arrival && loc != null && loc.getId() == this.id) {
+                this.locked = true;
+                this.chosen = false;
+            } else {
+                this.locked = false;
+            }
+
+            if (!this.arrival && !this.locked && cho != null && cho.getId() == this.id) {
                 this.chosen = true;
             } else {
                 this.chosen = false;
             }
-            this.repaint();
-        }
-    }
 
+        }
+        this.repaint();
+        this.revalidate();
+    }
 }
+
+

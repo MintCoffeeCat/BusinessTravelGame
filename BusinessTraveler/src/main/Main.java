@@ -16,6 +16,7 @@ import model.Path.Path;
 import model.User.User;
 import model.WorldMap.WorldMap;
 import model.EnumType.EnumTypes.PathType;
+import model.TimeHandler;
 import view.MainFrame;
 
 /**
@@ -28,13 +29,14 @@ public class Main {
 
         BusinessPointFactory bfct = new BusinessPointFactory();
         WorldMap wMap = WorldMap.getInstance();
+        TimeHandler tHandler = TimeHandler.getInstance();
 
-        BusinessPoint a = bfct.getBusinessPoint(1, "village A");
-        BusinessPoint b = bfct.getBusinessPoint(1, "village B");
-        BusinessPoint c = bfct.getBusinessPoint(2, "town C");
-        BusinessPoint d = bfct.getBusinessPoint(2, "town D");
-        BusinessPoint e = bfct.getBusinessPoint(3, "city E");
-        BusinessPoint f = bfct.getBusinessPoint(3, "city F");
+        BusinessPoint a = bfct.getBusinessPoint(1, "village A", 300, 300);
+        BusinessPoint b = bfct.getBusinessPoint(1, "village B", 450, 530);
+        BusinessPoint c = bfct.getBusinessPoint(2, "town C", 700, 200);
+        BusinessPoint d = bfct.getBusinessPoint(2, "town D", 1000, 220);
+        BusinessPoint e = bfct.getBusinessPoint(3, "city E", 520, 100);
+        BusinessPoint f = bfct.getBusinessPoint(3, "city F", 680, 400);
 
         a.generateTopography(new Plain(new Mountain(a.getStore())));
         b.generateTopography(new Mountain(new Forest(b.getStore())));
@@ -71,10 +73,12 @@ public class Main {
         u.setEnergy(60);
 
         jf.getWorldMapPanel().initWorldMap(wMap.getAllPoints(), wMap.getAllPaths());
-        u.attach(jf.getNowBusinessPoint());
-        u.attach(jf.getDestinationPoint());
+        wMap.attach(jf.getNowBusinessPoint());
+        wMap.attach(jf.getDestinationPoint());
         u.attach(jf.getBasicInfoPanel());
-
+        tHandler.attach(jf.getBasicInfoPanel());
+        wMap.setArrival(a);
+        
         jf.setVisible(true);
 //        Thread.sleep(1000);
 //        u.changeTravelDestination(bf);

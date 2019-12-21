@@ -183,7 +183,6 @@ public class MainFrame extends javax.swing.JFrame {
     public BasicInfoPanel getBasicInfoPanel(){
         return this.infoBar;
     }
-    
     public WorldMapPanel getWorldMapPanel(){
         return this.worldMapPanel;
     }

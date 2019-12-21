@@ -5,6 +5,9 @@
  */
 package myinterface;
 
+import java.util.ArrayList;
+import model.TimeHandler;
+
 /**
  *
  * @author Yun_c
@@ -12,4 +15,8 @@ package myinterface;
 public interface TimeInfluencable {
     
     public abstract void timePassBy();
+
+    default public void addToHandler() {
+        TimeHandler.getInstance().add(this);
+    }
 }

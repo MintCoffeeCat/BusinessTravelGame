@@ -13,7 +13,6 @@ import java.awt.event.MouseListener;
  * @author Yun_c
  */
 public class Button extends javax.swing.JPanel implements MouseListener {
-    
 
     /**
      * Creates new form Button
@@ -22,10 +21,17 @@ public class Button extends javax.swing.JPanel implements MouseListener {
         initComponents();
         addMouseListener(this);
     }
-    
-    public void setText(String text){
+
+    public Button(String str) {
+        initComponents();
+        this.setText(str);
+        addMouseListener(this);
+    }
+
+    public void setText(String text) {
         this.content.setText(text);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +59,7 @@ public class Button extends javax.swing.JPanel implements MouseListener {
             .addComponent(content, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+    private boolean enabled = true;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -61,25 +68,53 @@ public class Button extends javax.swing.JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-                setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        if (this.enabled) {
+            setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        if (this.enabled) {
+            setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        }
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.setBackground(new java.awt.Color(255, 255, 255));
+        if (this.enabled) {
+            this.setBackground(new java.awt.Color(255, 255, 255));
+        }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        setBackground(new java.awt.Color(240, 240, 240));
+        if (this.enabled) {
+            setBackground(new java.awt.Color(240, 240, 240));
+        }
+
     }
 
+    public String getText() {
+        return this.content.getText();
+    }
 
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(boolean b) {
+        this.enabled = b;
+        if (this.enabled) {
+            setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+            setBackground(new java.awt.Color(240, 240, 240));
+        }else{
+            setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+            setBackground(new java.awt.Color(210, 210, 210));
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel content;
     // End of variables declaration//GEN-END:variables

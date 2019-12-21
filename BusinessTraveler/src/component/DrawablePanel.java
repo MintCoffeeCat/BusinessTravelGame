@@ -5,16 +5,15 @@
  */
 package component;
 
-import controller.MapDragController;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import model.BusinessPoint.BusinessPoint;
 import model.Path.Path;
 import model.WorldMap.WorldMap;
@@ -51,15 +50,15 @@ public class DrawablePanel extends JPanel {
             int endY = 0;
             if ((((aY < bY + tempB.getHeight()) && aY > bY) || ((aY + tempA.getHeight() > bY) && aY < bY))
                     && ((aX > bX + tempB.getWidth()) || (aX + tempA.getWidth() < bX))) {
-                
+
                 startX = aX > bX ? bX + tempB.getWidth() : aX + tempA.getWidth();
                 endX = aX > bX ? aX : bX;
                 startY = aX > bX ? (bY + bY + tempB.getHeight()) / 2 : (aY + aY + tempA.getHeight()) / 2;
                 endY = aX > bX ? (aY + aY + tempA.getHeight()) / 2 : (bY + bY + tempB.getHeight()) / 2;
-                
+
             } else if ((((aX < bX + tempB.getWidth()) && aX > bX) || ((aX + tempA.getWidth() > bX) && aX < bX))
                     && ((aY > bY + tempB.getHeight()) || (aY + tempA.getHeight() < bY))) {
-                
+
                 startX = aY > bY ? (bX + bX + tempB.getWidth()) / 2 : (aX + aX + tempA.getWidth()) / 2;
                 endX = aY > bY ? (aX + aX + tempA.getWidth()) / 2 : (bX + bX + tempB.getWidth()) / 2;
                 startY = aY > bY ? bY + tempB.getHeight() : aY + tempA.getHeight();
@@ -93,6 +92,10 @@ public class DrawablePanel extends JPanel {
 
     private Map<Integer, BusinessPointOnMap> businessPoints;
 
+    public Collection<BusinessPointOnMap> getAllPoints() {
+        return this.businessPoints.values();
+    }
+
     public void initWorldMap(BusinessPoint[] bps, Path[] paths) {
         businessPoints = new HashMap<Integer, BusinessPointOnMap>();
         WorldMap wMap = WorldMap.getInstance();
@@ -104,6 +107,14 @@ public class DrawablePanel extends JPanel {
         for (int i = 0; i < bps.length; i++) {
             BusinessPointOnMap temp = new BusinessPointOnMap(bps[i]);
             this.businessPoints.put(temp.getId(), temp);
+            this.add(temp);
+            wMap.attach(temp);
+
+            if (bps[i].getX() > 0 && bps[i].getY() > 0) {
+                temp.setBounds(bps[i].getX(), bps[i].getY(), bpWidth, bpHeight);
+                continue;
+            }
+
             if (i == 0) {
                 temp.setBounds(maxX / 2, maxY / 2, bpWidth, bpHeight);
             } else {
@@ -130,8 +141,6 @@ public class DrawablePanel extends JPanel {
                 }
                 temp.setBounds(bp_x, bp_y, bpWidth, bpHeight);
             }
-            this.add(temp);
-            wMap.attach(temp);
         }
 
     }

@@ -25,6 +25,8 @@ public abstract class BusinessPoint implements Subject {
 
     private static int NOW_ID = 0;
     private final int id;
+    protected int x;
+    protected int y;
     protected ImageIcon img;
     protected String name;
     protected EnvironmentInfluencable store;
@@ -46,6 +48,26 @@ public abstract class BusinessPoint implements Subject {
         this.name = name;
         this.store = s;
         this.path = null;
+        this.x = -1;
+        this.y = -1;
+    }
+
+    public BusinessPoint(String name, Store s, int x, int y) {
+        this.id = BusinessPoint.NOW_ID;
+        BusinessPoint.NOW_ID += 1;
+        this.name = name;
+        this.store = s;
+        this.path = null;
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public TopographyType[] getTopography() {
@@ -90,6 +112,14 @@ public abstract class BusinessPoint implements Subject {
 
     public void setPath(Path path) {
         this.path = path;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void generateTopography(Topography env) {

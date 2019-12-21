@@ -6,6 +6,7 @@
 package model.User;
 
 import model.BusinessPoint.BusinessPoint;
+import model.WorldMap.WorldMap;
 import myinterface.Subject;
 
 /**
@@ -18,8 +19,8 @@ public class User implements Subject {
     private int money;
     private int energy;
     private int max_energy;
-    private BusinessPoint arrive;
-    private BusinessPoint wantTo;
+//    private BusinessPoint arrive;
+//    private BusinessPoint wantTo;
 
     private static class UserInner {
 
@@ -32,14 +33,14 @@ public class User implements Subject {
 
     private User() {
         this.name = "";
-        this.arrive = null;
-        this.wantTo = null;
+//        this.arrive = null;
+//        this.wantTo = null;
     }
 
     private User(String name) {
         this.name = name;
-        this.arrive = null;
-        this.wantTo = null;
+//        this.arrive = null;
+//        this.wantTo = null;
     }
 
     public String getName() {
@@ -75,27 +76,19 @@ public class User implements Subject {
     }
 
     public BusinessPoint getArrive() {
-        return arrive;
+        return WorldMap.getInstance().getNowArrive();
     }
 
     public void setArrive(BusinessPoint arrive) {
-        this.arrive = arrive;
+        WorldMap.getInstance().setArrival(arrive);
     }
 
     public BusinessPoint getWantTo() {
-        return wantTo;
+        return WorldMap.getInstance().getChosen();
     }
 
     public void setWantTo(BusinessPoint wantTo) {
-        this.wantTo = wantTo;
-    }
-
-    public void changeTravelDestination(BusinessPoint dest) {
-        if (dest == this.arrive || dest == this.wantTo) {
-            return;
-        }
-        this.wantTo = dest;
-        this.notifyObserver();
+        WorldMap.getInstance().setChosen(wantTo);
     }
 
     public void travel() {
@@ -104,8 +97,13 @@ public class User implements Subject {
         Here write the energy cost when Path is implemented
         
          */
-        this.arrive = this.wantTo;
-        this.setWantTo(null);
+        BusinessPoint dest = WorldMap.getInstance().getLocked();
+        if(dest == null){
+            dest = WorldMap.getInstance().getChosen();
+        }
+        WorldMap.getInstance().setArrival(dest);
+        WorldMap.getInstance().setChosen(null);
+        WorldMap.getInstance().setLocked(null);
         this.notifyObserver();
     }
 
