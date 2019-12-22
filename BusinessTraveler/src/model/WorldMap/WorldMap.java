@@ -206,14 +206,17 @@ public class WorldMap implements Subject, TimeInfluencable {
     public void bellmanFord() {
         this.initBellmanFord(this.getNowArrive());
         for (int i = 0; i < this.points.size() - 1; i++) {
+            System.out.println(i);
             for (Path p : this.paths.values()) {
                 this.relax(p.getA(), p.getB(), p.getTotalMoveCost());
                 this.relax(p.getB(), p.getA(), p.getTotalMoveCost());
             }
         }
         BusinessPoint bp = this.getLocked();
+        System.out.println("lock:" + bp);
         if (bp == null) {
             bp = this.getChosen();
+            System.out.println("chosen:" + bp);
         }
         while (true) {
             int pid = bp.getPi();

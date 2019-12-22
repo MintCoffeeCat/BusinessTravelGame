@@ -81,6 +81,7 @@ public class Main {
         tHandler.attach(jf.getBasicInfoPanel());
         wMap.setArrival(a);
         
+//        Thread.sleep(1000);
         jf.setVisible(true);
 //        Thread.sleep(1000);
 //        u.changeTravelDestination(bf);

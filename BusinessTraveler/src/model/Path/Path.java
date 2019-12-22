@@ -31,8 +31,15 @@ public class Path implements Subject, TimeInfluencable, EnvironmentInfluencable<
     private Color color;
 
     public Path(PathType tp, BusinessPoint a, BusinessPoint b, int cost) {
-        this(tp, a, b);
+        this.id = Path.NOW_ID;
+        Path.NOW_ID += 1;
+        this.type = tp;
         this.baseMoveCost = cost;
+        this.aPoint = a;
+        this.bPoint = b;
+        this.stageInfluence(a.getWeather());
+        this.stageInfluence(b.getWeather());
+        this.color = Color.BLACK;
     }
 
     public Path(PathType tp, BusinessPoint a, BusinessPoint b) {
@@ -64,7 +71,9 @@ public class Path implements Subject, TimeInfluencable, EnvironmentInfluencable<
     }
 
     public int getTotalMoveCost() {
-        return this.baseMoveCost + this.weatherMoveCost;
+        int cost = this.baseMoveCost + this.weatherMoveCost;
+        if(cost < 0)cost = 1;
+        return cost;
     }
 
     public BusinessPoint getA() {
@@ -88,6 +97,10 @@ public class Path implements Subject, TimeInfluencable, EnvironmentInfluencable<
         Map<PathType, Double> res = w.calculateInfluence();
         Double influence = res.get(this.type);
         this.weatherMoveCost += influence;
+        System.out.println("path " + this.getA().getName() + " to " + 
+                this.getB().getName() + ": " + influence + "base :" + 
+                this.baseMoveCost + " weather :" + this.weatherMoveCost + 
+                " total :" + (this.baseMoveCost + this.weatherMoveCost) );
     }
 
     @Override

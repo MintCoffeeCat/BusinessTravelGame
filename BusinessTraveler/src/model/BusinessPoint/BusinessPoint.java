@@ -42,7 +42,7 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
     public BusinessPoint() {
         this.id = BusinessPoint.NOW_ID;
         BusinessPoint.NOW_ID += 1;
-        this.d = Integer.MAX_VALUE;
+        this.d = Short.MAX_VALUE;
         this.pi = -1;
         this.weatherGenerater.timePassBy();
         this.generateWeather(this.weatherGenerater.getWeather());
