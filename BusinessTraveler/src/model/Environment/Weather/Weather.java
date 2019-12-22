@@ -3,24 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.Environment;
+package model.Environment.Weather;
 
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import model.EnumType.Couple;
 import model.Path.Path;
 import model.EnumType.EnumTypes.WeatherType;
+import model.Environment.Environment;
 import myinterface.EnvironmentInfluencable;
 
 /**
  *
  * @author Yun_c
  */
-public class Weather<K> extends Environment<K, WeatherType> {
+public abstract class Weather<K> extends Environment<K, WeatherType> {
 
     protected WeatherType weatherType;
     protected ImageIcon img;
-
+    protected double keepRatio;
+    
     public Weather(WeatherType type, String icon) {
         this.weatherType = type;
         this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/" + icon));
@@ -31,10 +33,13 @@ public class Weather<K> extends Environment<K, WeatherType> {
         this.weatherType = type;
         this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/" + icon));
     }
-
-    public void init() {
+    
+    public int getAlertLevel(){
+        return this.weatherType.getAlertLevel();
     }
-
+    public ImageIcon getImg(){
+        return img;
+    }
     @Override
     public WeatherType getEnvironmentType() {
         return this.weatherType;

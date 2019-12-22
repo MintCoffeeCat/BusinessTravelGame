@@ -11,12 +11,13 @@ import java.util.Map;
 import model.BusinessPoint.BusinessPoint;
 import model.Path.Path;
 import myinterface.Subject;
+import myinterface.TimeInfluencable;
 
 /**
  *
  * @author Yun_c
  */
-public class WorldMap implements Subject {
+public class WorldMap implements Subject, TimeInfluencable {
 
     private int chosenId;
     private int nowId;
@@ -36,6 +37,7 @@ public class WorldMap implements Subject {
         this.chosenId = -1;
         this.nowId = -1;
         this.lockId = -1;
+        this.addToTimeHandler();
     }
 
     public static WorldMap getInstance() {
@@ -124,7 +126,7 @@ public class WorldMap implements Subject {
             this.notifyObserver();
             return;
         }
-        if(this.nowId == bp.getId()){
+        if (this.nowId == bp.getId()) {
             return;
         }
         this.lockId = bp.getId();
@@ -133,5 +135,16 @@ public class WorldMap implements Subject {
 
     public Path getPath(int id) {
         return paths.get(id);
+    }
+
+    @Override
+    public void timePassBy() {
+        for(BusinessPoint bp : this.points.values()){
+            bp.timePassBy();
+        }
+        for(Path p : this.paths.values()){
+            p.timePassBy();
+        }
+        this.notifyObserver();
     }
 }

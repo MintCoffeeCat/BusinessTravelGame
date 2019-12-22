@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.Environment;
+package model.Environment.Topography;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import model.EnumType.EnumTypes.TopographyType;
 import model.EnumType.Couple;
+import model.Environment.Environment;
 import myinterface.EnvironmentInfluencable;
 
 /**
@@ -26,13 +27,9 @@ public abstract class Topography<K> extends Environment<K, TopographyType> {
         this.type = tp;
     }
 
-    public Topography() {
+    public Topography(TopographyType tp) {
         super();
-    }
-
-    @Override
-    public void init() {
-
+        this.type = tp;
     }
 
     @Override

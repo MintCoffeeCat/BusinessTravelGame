@@ -6,7 +6,7 @@
 package myinterface;
 
 import java.util.ArrayList;
-import model.TimeHandler;
+import tools.TimeHandler;
 
 /**
  *

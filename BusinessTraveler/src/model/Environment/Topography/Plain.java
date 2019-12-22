@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.Environment;
+package model.Environment.Topography;
 
 import model.Goods.Goods;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import model.EnumType.EnumTypes.TopographyType;
 public class Plain extends Topography<GoodsType> {
 
     public Plain() {
-        super();
+        super(TopographyType.PLAIN);
     }
 
     public Plain(EnvironmentInfluencable s) {

@@ -5,7 +5,7 @@
  */
 package component;
 
-import model.TimeHandler;
+import tools.TimeHandler;
 import model.User.User;
 import myinterface.Observer;
 import myinterface.Subject;

@@ -281,16 +281,39 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
     // End of variables declaration//GEN-END:variables
     private boolean isArrive;
 
+    private void businessPointInfoChange(BusinessPoint bp) {
+        String tName = "";
+        String tLevel = "";
+        String pLevel = "";
+        TopographyType[] env = {};
+        GoodsType[] spe = {};
+        ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
+        ImageIcon iconWeather = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
+        if (bp != null) {
+            tName = bp.getName();
+            tLevel = bp.getStore().getMAX_GOODS_LEVEL() + "";
+            pLevel = bp.getPointLevel();
+            env = bp.getTopographyType();
+            spe = bp.getStoreSpecialityType();
+            icon = bp.getImg();
+            iconWeather = bp.getWeather().getImg();
+        }
+        this.townName.setText(tName);
+        this.townLevel.setText(tLevel);
+        this.pointLevel.setText(pLevel);
+
+        this.environmentList.clearItem();
+        this.specialityList.clearItem();
+        this.environmentList.addItem(env);
+        this.specialityList.addItem(spe);
+        this.BusinessPointPic.setImage(icon);
+        this.weatherPic.setImage(iconWeather);
+    }
+
     @Override
     public void update(Subject s) {
         if (s instanceof WorldMap) {
             BusinessPoint newBP = WorldMap.getInstance().getLocked();
-            String tName = "";
-            String tLevel = "";
-            String pLevel = "";
-            TopographyType[] env = {};
-            GoodsType[] spe = {};
-            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
             if (this.isArrive) {
                 newBP = WorldMap.getInstance().getNowArrive();
             } else {
@@ -298,25 +321,9 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
                     newBP = WorldMap.getInstance().getChosen();
                 }
             }
-
-            if (newBP != null) {
-                tName = newBP.getName();
-                tLevel = newBP.getStore().getMAX_GOODS_LEVEL() + "";
-                pLevel = newBP.getPointLevel();
-                env = newBP.getTopography();
-                spe = newBP.getStoreSpeciality();
-                icon = newBP.getImg();
-            }
-            this.townName.setText(tName);
-            this.townLevel.setText(tLevel);
-            this.pointLevel.setText(pLevel);
-
-            this.environmentList.clearItem();
-            this.specialityList.clearItem();
-            this.environmentList.addItem(env);
-            this.specialityList.addItem(spe);
-            this.BusinessPointPic.setImage(icon);
-            //this.weatherPic.setImage();
+            this.businessPointInfoChange(newBP);
+        } else if (s instanceof BusinessPoint) {
+            this.businessPointInfoChange((BusinessPoint) s);
         }
         this.repaint();
         this.revalidate();

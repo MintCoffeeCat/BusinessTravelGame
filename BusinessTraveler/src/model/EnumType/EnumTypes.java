@@ -22,13 +22,27 @@ public class EnumTypes {
     }
     
     public enum WeatherType{
-        SUNNY("sunny"),RAINY("rainy"),HEAVY_RAINY("heavy rainy"),
-        SNOWY("snowy");
+        SUNNY("sunny",0),RAINY("rainy",2),HEAVY_RAINY("heavy rainy",3),
+        SNOWY("snowy",4),CLOUDY("cloudy",1);
         
         private String name;
+        private int alertLevel;
         
-        private WeatherType(String n){
+        private WeatherType(String n, int lv){
             this.name = n;
+            this.alertLevel = lv;
+        }
+        public static WeatherType getWeatherByAlertLevel(int i){
+            WeatherType[] wth = WeatherType.values();
+            for(WeatherType w : wth){
+                if(w.alertLevel == i){
+                    return w;
+                }
+            }
+            return SUNNY;
+        }
+        public int getAlertLevel(){
+            return this.alertLevel;
         }
     }
     

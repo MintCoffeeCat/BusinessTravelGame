@@ -8,7 +8,7 @@ package controller;
 import component.Button;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import model.TimeHandler;
+import tools.TimeHandler;
 import model.User.User;
 
 /**

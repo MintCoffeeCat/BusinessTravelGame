@@ -11,18 +11,20 @@ import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import model.EnumType.EnumTypes.GoodsType;
-import model.Environment.Topography;
-import model.Environment.Weather;
+import model.Environment.Topography.Topography;
+import model.Environment.Weather.Weather;
 import model.EnumType.EnumTypes.TopographyType;
 import model.Environment.Environment;
 import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
+import myinterface.TimeInfluencable;
+import tools.WeatherGenerater;
 
 /**
  *
  * @author Yun_c
  */
-public abstract class BusinessPoint implements Subject {
+public abstract class BusinessPoint implements Subject,TimeInfluencable {
 
     private static int NOW_ID = 0;
     private final int id;
@@ -33,6 +35,7 @@ public abstract class BusinessPoint implements Subject {
     protected EnvironmentInfluencable topographys;
     protected EnvironmentInfluencable weather;
     protected String pointLevel;
+    protected WeatherGenerater weatherGenerater = new WeatherGenerater();
 
     public int getId() {
         return id;
@@ -41,22 +44,20 @@ public abstract class BusinessPoint implements Subject {
     public BusinessPoint() {
         this.id = BusinessPoint.NOW_ID;
         BusinessPoint.NOW_ID += 1;
+        this.weatherGenerater.timePassBy();
+        this.generateWeather(this.weatherGenerater.getWeather());
     }
 
     public BusinessPoint(String name) {
-        this.id = BusinessPoint.NOW_ID;
-        BusinessPoint.NOW_ID += 1;
-        this.name = name;
-        this.x = -1;
-        this.y = -1;
+        this(name, -1, -1);
     }
 
     public BusinessPoint(String name, int x, int y) {
-        this.id = BusinessPoint.NOW_ID;
-        BusinessPoint.NOW_ID += 1;
+        this();
         this.name = name;
         this.x = x;
         this.y = y;
+
     }
 
     public int getX() {
@@ -67,32 +68,40 @@ public abstract class BusinessPoint implements Subject {
         return y;
     }
 
-    public TopographyType[] getTopography() {
+    public TopographyType[] getTopographyType() {
         Set<TopographyType> topo = this.topographys.getEnvironment();
         TopographyType[] envStr = new TopographyType[topo.size()];
         return (TopographyType[]) topo.toArray(envStr);
     }
 
-    public GoodsType[] getStoreSpeciality() {
+    public GoodsType[] getStoreSpecialityType() {
         Set<GoodsType> spe = this.topographys.getSpeciality();
         GoodsType[] envStr = new GoodsType[spe.size()];
         return (GoodsType[]) spe.toArray(envStr);
     }
 
-    public String getPointLevel() {
-        return pointLevel;
+    public void generateTopography(Topography env) {
+        if (this.topographys != null && this.topographys.getOri() instanceof Store) {
+            env.setTarget((Store) this.topographys.getOri());
+            this.topographys = env;
+            ((Store) this.topographys.getOri()).stageInfluence((Environment) this.topographys);
+        } else {
+            this.topographys = env;
+        }
     }
 
-    public ImageIcon getImg() {
-        return img;
+    private void generateWeather(Weather wth) {
+        if (this.weather != null && this.weather.getOri() instanceof Path) {
+            wth.setTarget((Path) this.weather.getOri());
+        }
+        this.weather = wth;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Weather getWeather() {
+        if (!(this.weather instanceof Weather)) {
+            return null;
+        }
+        return (Weather) this.weather;
     }
 
     public Store getStore() {
@@ -124,8 +133,28 @@ public abstract class BusinessPoint implements Subject {
         return (Path) weather.getOri();
     }
 
-    public Weather getWeather() {
-        return (Weather)this.weather;
+    public void setPath(Path path) {
+        if (this.weather == null || this.weather instanceof Path) {
+            this.weather = path;
+        } else if (this.weather instanceof Weather) {
+            ((Environment) this.weather).setTarget(path);
+        }
+    }
+
+    public String getPointLevel() {
+        return pointLevel;
+    }
+
+    public ImageIcon getImg() {
+        return img;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setX(int x) {
@@ -136,14 +165,10 @@ public abstract class BusinessPoint implements Subject {
         this.y = y;
     }
 
-    public void generateTopography(Topography env) {
-        this.topographys = env;
-        if (this.topographys.getOri() instanceof Store) {
-            ((Store) this.topographys.getOri()).stageInfluence((Environment) this.topographys);
-        }
-    }
-
-    public void generateWeather(Weather wth) {
-        this.weather = wth;
+    @Override
+    public void timePassBy() {
+        this.weatherGenerater.timePassBy();
+        this.generateWeather(this.weatherGenerater.getWeather());
+        this.notifyObserver();
     }
 }

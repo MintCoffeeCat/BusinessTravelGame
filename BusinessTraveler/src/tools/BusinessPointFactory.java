@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package factory;
+package tools;
 
 import java.util.Random;
 import model.BusinessPoint.BusinessPoint;

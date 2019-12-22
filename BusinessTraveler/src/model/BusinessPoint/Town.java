@@ -15,7 +15,7 @@ import model.BusinessPoint.BusinessPoint;
 public class Town extends BusinessPoint {
 
     public Town(String name) {
-        this.name = name;
+        super(name);
         this.setStore(new Store(70, 2));
         this.pointLevel = "Town";
         this.img = new ImageIcon(this.getClass().getClassLoader().getResource("img/town.jpg"));

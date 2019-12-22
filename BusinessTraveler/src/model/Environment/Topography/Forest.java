@@ -3,35 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.Environment;
+package model.Environment.Topography;
 
 import java.util.HashMap;
 import model.BusinessPoint.Store;
-import model.EnumType.Couple;
-import model.EnumType.EnumTypes;
 import model.EnumType.EnumTypes.GoodsType;
+import model.EnumType.Couple;
 import model.EnumType.EnumTypes.TopographyType;
+
 import myinterface.EnvironmentInfluencable;
 
 /**
  *
  * @author Yun_c
  */
-public class Mountain extends Topography<GoodsType> {
-    
-    public Mountain(EnvironmentInfluencable s) {
-        super(s, TopographyType.MOUNTAIN);
+public class Forest extends Topography<GoodsType> {
+
+    public Forest(EnvironmentInfluencable s) {
+        super(s, TopographyType.FOREST);
     }
 
-    public Mountain() {
-        super();
+    public Forest() {
+        super(TopographyType.FOREST);
     }
 
     public void init() {
         this.addInfluence(
-                new Couple(GoodsType.MINERAL, 0.95),
-                new Couple(GoodsType.STONE, 0.8),
-                new Couple(GoodsType.CRYSTAL, 0.9)
+                new Couple<GoodsType, Double>(GoodsType.WOOD, 0.95),
+                new Couple<GoodsType, Double>(GoodsType.FRUIT, 0.9)
         );
     }
 }

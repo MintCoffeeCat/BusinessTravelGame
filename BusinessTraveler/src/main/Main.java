@@ -6,17 +6,17 @@
 package main;
 
 import component.WorldMapPanel;
-import factory.BusinessPointFactory;
+import tools.BusinessPointFactory;
 import javax.swing.JFrame;
 import model.BusinessPoint.BusinessPoint;
-import model.Environment.Forest;
-import model.Environment.Mountain;
-import model.Environment.Plain;
+import model.Environment.Topography.Forest;
+import model.Environment.Topography.Mountain;
+import model.Environment.Topography.Plain;
 import model.Path.Path;
 import model.User.User;
 import model.WorldMap.WorldMap;
 import model.EnumType.EnumTypes.PathType;
-import model.TimeHandler;
+import tools.TimeHandler;
 import view.MainFrame;
 
 /**
