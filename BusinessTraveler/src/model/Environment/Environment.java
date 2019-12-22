@@ -92,12 +92,19 @@ public abstract class Environment<K, E> implements EnvironmentInfluencable<K, E>
                 influenceList.put(inf_type, inf_value);
             }
         });
-        return this.target.calculateInfluence(influenceList);
+        if (this.target == null) {
+            return influenceList;
+        } else {
+            return this.target.calculateInfluence(influenceList);
+        }
+
     }
 
     @Override
     public Object getOri() {
-        if(this.target == null)return this;
+        if (this.target == null) {
+            return this;
+        }
         return this.target.getOri();
     }
 }

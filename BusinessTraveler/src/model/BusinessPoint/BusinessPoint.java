@@ -24,12 +24,15 @@ import tools.WeatherGenerater;
  *
  * @author Yun_c
  */
-public abstract class BusinessPoint implements Subject,TimeInfluencable {
+public abstract class BusinessPoint implements Subject, TimeInfluencable {
 
     private static int NOW_ID = 0;
     private final int id;
     protected int x;
     protected int y;
+    protected int d;
+    protected int pi;
+    
     protected ImageIcon img;
     protected String name;
     protected EnvironmentInfluencable topographys;
@@ -68,12 +71,18 @@ public abstract class BusinessPoint implements Subject,TimeInfluencable {
         return y;
     }
 
+    /**
+     * return the array of type, if no any topography, return empty array.
+     */
     public TopographyType[] getTopographyType() {
         Set<TopographyType> topo = this.topographys.getEnvironment();
         TopographyType[] envStr = new TopographyType[topo.size()];
         return (TopographyType[]) topo.toArray(envStr);
     }
 
+    /**
+     * return the array of specialityType, if no any Speciality, return empty array.
+     */
     public GoodsType[] getStoreSpecialityType() {
         Set<GoodsType> spe = this.topographys.getSpeciality();
         GoodsType[] envStr = new GoodsType[spe.size()];
@@ -96,14 +105,21 @@ public abstract class BusinessPoint implements Subject,TimeInfluencable {
         }
         this.weather = wth;
     }
-
+    
+    /**
+     * return the current weather of this BusinessPoint, if no weather exists,
+     * return null.
+     */
     public Weather getWeather() {
         if (!(this.weather instanceof Weather)) {
             return null;
         }
         return (Weather) this.weather;
     }
-
+    
+    /**
+     * return the Store of this BusinessPoint, if no Store exists, return null.
+     */
     public Store getStore() {
         if (topographys == null) {
             return null;
@@ -121,24 +137,6 @@ public abstract class BusinessPoint implements Subject,TimeInfluencable {
             ((Environment) this.topographys).setTarget(store);
         }
 
-    }
-
-    public Path getPath() {
-        if (weather == null) {
-            return null;
-        }
-        if (weather.getOri() instanceof Environment) {
-            return null;
-        }
-        return (Path) weather.getOri();
-    }
-
-    public void setPath(Path path) {
-        if (this.weather == null || this.weather instanceof Path) {
-            this.weather = path;
-        } else if (this.weather instanceof Weather) {
-            ((Environment) this.weather).setTarget(path);
-        }
     }
 
     public String getPointLevel() {

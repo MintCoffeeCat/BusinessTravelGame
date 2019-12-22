@@ -7,6 +7,7 @@ package view;
 
 import component.BasicInfoPanel;
 import component.BusinessPointPanel;
+import component.PathPanel;
 import component.WorldMapPanel;
 
 /**
@@ -182,6 +183,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
     public BasicInfoPanel getBasicInfoPanel(){
         return this.infoBar;
+    }
+    public PathPanel getPathPanel(){
+        return this.pathPanel1;
     }
     public WorldMapPanel getWorldMapPanel(){
         return this.worldMapPanel;

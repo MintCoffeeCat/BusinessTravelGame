@@ -42,8 +42,8 @@ public class Path implements Subject, TimeInfluencable, EnvironmentInfluencable<
         this.weatherMoveCost = 0;
         this.aPoint = a;
         this.bPoint = b;
-        a.setPath(this);
-        b.setPath(this);
+        this.stageInfluence(a.getWeather());
+        this.stageInfluence(b.getWeather());
         this.color = Color.BLACK;
     }
 

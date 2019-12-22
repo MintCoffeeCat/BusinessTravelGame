@@ -75,6 +75,7 @@ public class Main {
         jf.getWorldMapPanel().initWorldMap(wMap.getAllPoints(), wMap.getAllPaths());
         wMap.attach(jf.getNowBusinessPoint());
         wMap.attach(jf.getDestinationPoint());
+        wMap.attach(jf.getPathPanel());
         u.attach(jf.getBasicInfoPanel());
         tHandler.attach(jf.getBasicInfoPanel());
         wMap.setArrival(a);

@@ -136,7 +136,18 @@ public class WorldMap implements Subject, TimeInfluencable {
     public Path getPath(int id) {
         return paths.get(id);
     }
-
+    public ArrayList<Path> getShortestPath(){
+        ArrayList<Path> arr = new ArrayList<>();
+        
+        BusinessPoint now = this.getNowArrive();
+        BusinessPoint dest = this.getLocked();
+        if(dest == null)dest = this.getChosen();
+        if(dest == null)return null;
+        while(true){
+        }
+  
+    }
+    
     @Override
     public void timePassBy() {
         for(BusinessPoint bp : this.points.values()){
@@ -146,5 +157,11 @@ public class WorldMap implements Subject, TimeInfluencable {
             p.timePassBy();
         }
         this.notifyObserver();
+    }
+    private void initBellmanFord(){
+        
+    }
+    private void relax(BusinessPoint u, BusinessPoint v){
+
     }
 }
