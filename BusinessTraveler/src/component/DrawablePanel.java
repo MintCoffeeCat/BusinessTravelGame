@@ -17,12 +17,14 @@ import javax.swing.JPanel;
 import model.BusinessPoint.BusinessPoint;
 import model.Path.Path;
 import model.WorldMap.WorldMap;
+import myinterface.Observer;
+import myinterface.Subject;
 
 /**
  *
  * @author Yun_c
  */
-public class DrawablePanel extends JPanel {
+public class DrawablePanel extends JPanel implements Observer {
 
     public DrawablePanel() {
         super();
@@ -143,5 +145,13 @@ public class DrawablePanel extends JPanel {
             }
         }
 
+    }
+
+    @Override
+    public void update(Subject s) {
+       if(s instanceof WorldMap){
+           this.repaint();
+           this.revalidate();
+       }
     }
 }

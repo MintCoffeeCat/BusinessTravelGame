@@ -5,6 +5,7 @@
  */
 package model.WorldMap;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,6 +110,9 @@ public class WorldMap implements Subject, TimeInfluencable {
         if (bp == null) {
             this.chosenId = -1;
         }
+        if (this.lockId == -1 && bp != null) {
+            this.bellmanFord();
+        }
         this.notifyObserver();
     }
 
@@ -130,38 +134,95 @@ public class WorldMap implements Subject, TimeInfluencable {
             return;
         }
         this.lockId = bp.getId();
+        this.bellmanFord();
         this.notifyObserver();
     }
 
     public Path getPath(int id) {
         return paths.get(id);
     }
-    public ArrayList<Path> getShortestPath(){
+
+    public Path getPath(int aid, int bid) {
+        for (Path p : this.paths.values()) {
+            int aid_ = p.getA().getId();
+            int bid_ = p.getB().getId();
+            if ((aid == aid_ && bid == bid_) || (aid == bid_ && bid == aid_)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Path> getShortestPath() {
         ArrayList<Path> arr = new ArrayList<>();
-        
+
         BusinessPoint now = this.getNowArrive();
         BusinessPoint dest = this.getLocked();
-        if(dest == null)dest = this.getChosen();
-        if(dest == null)return null;
-        while(true){
+        if (dest == null) {
+            dest = this.getChosen();
         }
-  
+        if (dest == null) {
+            return null;
+        }
+        while (true) {
+        }
+
     }
-    
+
     @Override
     public void timePassBy() {
-        for(BusinessPoint bp : this.points.values()){
+        for (BusinessPoint bp : this.points.values()) {
             bp.timePassBy();
         }
-        for(Path p : this.paths.values()){
+        for (Path p : this.paths.values()) {
             p.timePassBy();
         }
         this.notifyObserver();
     }
-    private void initBellmanFord(){
-        
-    }
-    private void relax(BusinessPoint u, BusinessPoint v){
 
+    public void clearAllPathColor() {
+        for (Path p : this.paths.values()) {
+            p.setColor(Color.BLACK);
+        }
+        this.notifyObserver();
+    }
+
+    private void initBellmanFord(BusinessPoint s) {
+        this.clearAllPathColor();
+        for (BusinessPoint bp : this.points.values()) {
+            bp.setD((long) Integer.MAX_VALUE);
+            bp.setPi(-1);
+        }
+        s.setD(0L);
+    }
+
+    private void relax(BusinessPoint u, BusinessPoint v, int w) {
+        if (v.getD() > u.getD() + w) {
+            v.setD(u.getD() + w);
+            v.setPi(this.getPath(u.getId(), v.getId()).getId());
+        }
+    }
+
+    public void bellmanFord() {
+        this.initBellmanFord(this.getNowArrive());
+        for (int i = 0; i < this.points.size() - 1; i++) {
+            for (Path p : this.paths.values()) {
+                this.relax(p.getA(), p.getB(), p.getTotalMoveCost());
+                this.relax(p.getB(), p.getA(), p.getTotalMoveCost());
+            }
+        }
+        BusinessPoint bp = this.getLocked();
+        if (bp == null) {
+            bp = this.getChosen();
+        }
+        while (true) {
+            int pid = bp.getPi();
+            if (pid == -1) {
+                return;
+            }
+            Path p = this.getPath(bp.getPi());
+            p.setColor(Color.GREEN);
+            bp = p.getA().getId() == bp.getId() ? p.getB() : p.getA();
+        }
     }
 }

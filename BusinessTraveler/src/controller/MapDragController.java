@@ -54,6 +54,8 @@ public class MapDragController implements MouseMotionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         WorldMap.getInstance().setLocked(null);
+        WorldMap.getInstance().setChosen(null);
+        WorldMap.getInstance().clearAllPathColor();
     }
 
     @Override

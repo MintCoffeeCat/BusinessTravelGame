@@ -30,9 +30,8 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
     private final int id;
     protected int x;
     protected int y;
-    protected int d;
+    protected long d;
     protected int pi;
-    
     protected ImageIcon img;
     protected String name;
     protected EnvironmentInfluencable topographys;
@@ -40,13 +39,11 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
     protected String pointLevel;
     protected WeatherGenerater weatherGenerater = new WeatherGenerater();
 
-    public int getId() {
-        return id;
-    }
-
     public BusinessPoint() {
         this.id = BusinessPoint.NOW_ID;
         BusinessPoint.NOW_ID += 1;
+        this.d = Integer.MAX_VALUE;
+        this.pi = -1;
         this.weatherGenerater.timePassBy();
         this.generateWeather(this.weatherGenerater.getWeather());
     }
@@ -63,14 +60,6 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
 
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     /**
      * return the array of type, if no any topography, return empty array.
      */
@@ -81,7 +70,8 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
     }
 
     /**
-     * return the array of specialityType, if no any Speciality, return empty array.
+     * return the array of specialityType, if no any Speciality, return empty
+     * array.
      */
     public GoodsType[] getStoreSpecialityType() {
         Set<GoodsType> spe = this.topographys.getSpeciality();
@@ -105,7 +95,7 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
         }
         this.weather = wth;
     }
-    
+
     /**
      * return the current weather of this BusinessPoint, if no weather exists,
      * return null.
@@ -116,7 +106,7 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
         }
         return (Weather) this.weather;
     }
-    
+
     /**
      * return the Store of this BusinessPoint, if no Store exists, return null.
      */
@@ -137,6 +127,34 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
             ((Environment) this.topographys).setTarget(store);
         }
 
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public long getD() {
+        return this.d;
+    }
+
+    public int getPi() {
+        return this.pi;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setD(Long d) {
+        this.d = d;
+    }
+
+    public void setPi(int pi) {
+        this.pi = pi;
     }
 
     public String getPointLevel() {

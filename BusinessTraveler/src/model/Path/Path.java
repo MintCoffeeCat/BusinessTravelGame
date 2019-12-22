@@ -56,7 +56,15 @@ public class Path implements Subject, TimeInfluencable, EnvironmentInfluencable<
     }
 
     public int getBaseMoveCost() {
-        return baseMoveCost;
+        return this.baseMoveCost;
+    }
+
+    public int getWeatherMoveCost() {
+        return this.weatherMoveCost;
+    }
+
+    public int getTotalMoveCost() {
+        return this.baseMoveCost + this.weatherMoveCost;
     }
 
     public BusinessPoint getA() {
@@ -100,5 +108,19 @@ public class Path implements Subject, TimeInfluencable, EnvironmentInfluencable<
         this.stageInfluence(a);
         this.stageInfluence(b);
         this.notifyObserver();
+    }
+
+    public void checkColor() {
+        if ((this.aPoint.getPi() == this.bPoint.getId()
+                || this.bPoint.getPi() == this.aPoint.getId())
+                && (this.aPoint.getPi() != -1 || this.bPoint.getPi() != -1)) {
+            this.color = Color.GREEN;
+        } else {
+            this.color = Color.BLACK;
+        }
+    }
+
+    public void setColor(Color c) {
+        this.color = c;
     }
 }

@@ -76,6 +76,7 @@ public class Main {
         wMap.attach(jf.getNowBusinessPoint());
         wMap.attach(jf.getDestinationPoint());
         wMap.attach(jf.getPathPanel());
+        wMap.attach(jf.getDrawedPanel());
         u.attach(jf.getBasicInfoPanel());
         tHandler.attach(jf.getBasicInfoPanel());
         wMap.setArrival(a);

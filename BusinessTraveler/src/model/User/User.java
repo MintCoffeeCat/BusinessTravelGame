@@ -109,6 +109,7 @@ public class User implements Subject, TimeInfluencable  {
         WorldMap.getInstance().setArrival(dest);
         WorldMap.getInstance().setChosen(null);
         WorldMap.getInstance().setLocked(null);
+        WorldMap.getInstance().clearAllPathColor();
         this.notifyObserver();
     }
 

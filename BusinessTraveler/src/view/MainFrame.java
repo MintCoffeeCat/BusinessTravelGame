@@ -7,6 +7,7 @@ package view;
 
 import component.BasicInfoPanel;
 import component.BusinessPointPanel;
+import component.DrawablePanel;
 import component.PathPanel;
 import component.WorldMapPanel;
 
@@ -189,5 +190,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
     public WorldMapPanel getWorldMapPanel(){
         return this.worldMapPanel;
+    }
+    public DrawablePanel getDrawedPanel(){
+        return this.worldMapPanel.getMap();
     }
 }
