@@ -5,9 +5,11 @@
  */
 package component;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import model.BusinessPoint.BusinessPoint;
 import model.Environment.Weather.Weather;
+import model.User.User;
 import model.WorldMap.WorldMap;
 import myinterface.Observer;
 import myinterface.Subject;
@@ -139,8 +141,13 @@ public class PathPanel extends javax.swing.JPanel implements Observer {
             BusinessPoint b = wMap.getLocked();
             int aCost = 0;
             int bCost = 0;
-            int totalCost = 0;
-                    
+            int totalCost = wMap.getShortestCost();
+            this.totalCost.setText(String.valueOf(totalCost));
+            if (totalCost > User.getInstance().getEnergy()) {
+                this.totalCost.setForeground(Color.RED);
+            } else {
+                this.totalCost.setForeground(Color.BLACK);
+            }
             if (b == null) {
                 b = wMap.getChosen();
             }
@@ -150,7 +157,7 @@ public class PathPanel extends javax.swing.JPanel implements Observer {
                     icon = a.getWeather().getImg();
                 }
                 this.arrivalWeatherPic.setImage(icon);
-            }else{
+            } else {
                 this.arrivalWeatherPic.setImage(defaultIcon);
             }
             if (b != null) {
@@ -159,7 +166,7 @@ public class PathPanel extends javax.swing.JPanel implements Observer {
                     icon = b.getWeather().getImg();
                 }
                 this.DestWeatherPic.setImage(icon);
-            }else{
+            } else {
                 this.DestWeatherPic.setImage(defaultIcon);
             }
         }

@@ -41,6 +41,7 @@ public class ChoosePointController implements MouseListener {
         BusinessPointOnMap bpm = (BusinessPointOnMap) e.getSource();
         WorldMap wMap = WorldMap.getInstance();
         BusinessPoint bp = wMap.getPoint(bpm.getId());
+        System.out.println("mouse enter " + bp.getName());
         wMap.setChosen(bp);
     }
 

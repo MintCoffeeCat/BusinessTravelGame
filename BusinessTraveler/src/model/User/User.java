@@ -102,10 +102,12 @@ public class User implements Subject, TimeInfluencable  {
         Here write the energy cost when Path is implemented
         
          */
+        
         BusinessPoint dest = WorldMap.getInstance().getLocked();
         if(dest == null){
             dest = WorldMap.getInstance().getChosen();
         }
+        this.energy -= dest.getD();
         WorldMap.getInstance().setArrival(dest);
         WorldMap.getInstance().setChosen(null);
         WorldMap.getInstance().setLocked(null);

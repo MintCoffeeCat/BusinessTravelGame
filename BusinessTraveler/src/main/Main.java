@@ -28,6 +28,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         BusinessPointFactory bfct = new BusinessPointFactory();
+        User u = User.getInstance();
         WorldMap wMap = WorldMap.getInstance();
         TimeHandler tHandler = TimeHandler.getInstance();
 
@@ -45,12 +46,12 @@ public class Main {
         e.generateTopography(new Plain(new Forest()));
         f.generateTopography(new Mountain());
 
-        Path pab = new Path(PathType.DIRT, a, b, 10);
-        Path pac = new Path(PathType.DIRT, a, c, 8);
-        Path pbc = new Path(PathType.DIRT, b, c, 10);
-        Path pcd = new Path(PathType.GRASS, c, d, 8);
-        Path pde = new Path(PathType.ROAD, d, e, 6);
-        Path pdf = new Path(PathType.ROAD, d, f, 6);
+        Path pab = new Path(PathType.DIRT, a, b, 25);
+        Path pac = new Path(PathType.DIRT, a, c, 28);
+        Path pbc = new Path(PathType.DIRT, b, c, 22);
+        Path pcd = new Path(PathType.GRASS, c, d, 17);
+        Path pde = new Path(PathType.ROAD, d, e, 13);
+        Path pdf = new Path(PathType.ROAD, d, f, 11);
 
         wMap.addPoint(a);
         wMap.addPoint(b);
@@ -67,7 +68,6 @@ public class Main {
 
         MainFrame jf = new MainFrame();
 
-        User u = User.getInstance();
         u.setName("Alice");
         u.setMax_energy(80);
         u.setEnergy(60);
@@ -80,7 +80,7 @@ public class Main {
         u.attach(jf.getBasicInfoPanel());
         tHandler.attach(jf.getBasicInfoPanel());
         wMap.setArrival(a);
-        
+
 //        Thread.sleep(1000);
         jf.setVisible(true);
 //        Thread.sleep(1000);

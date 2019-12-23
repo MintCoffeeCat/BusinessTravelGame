@@ -320,8 +320,14 @@ public class BusinessPointPanel extends javax.swing.JPanel implements Observer {
                 if (newBP == null) {
                     newBP = WorldMap.getInstance().getChosen();
                 }
+                if (WorldMap.getInstance().getShortestCost() > User.getInstance().getEnergy()) {
+                    this.travelButton.setEnabled(false);
+                } else {
+                    this.travelButton.setEnabled(true);
+                }
             }
             this.businessPointInfoChange(newBP);
+
         } else if (s instanceof BusinessPoint) {
             this.businessPointInfoChange((BusinessPoint) s);
         }
