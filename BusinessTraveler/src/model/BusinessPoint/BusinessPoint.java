@@ -19,6 +19,7 @@ import myinterface.EnvironmentInfluencable;
 import myinterface.Subject;
 import myinterface.TimeInfluencable;
 import tools.WeatherGenerater;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  *
@@ -38,6 +39,7 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
     protected EnvironmentInfluencable weather;
     protected String pointLevel;
     protected WeatherGenerater weatherGenerater = new WeatherGenerater();
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public BusinessPoint() {
         this.id = BusinessPoint.NOW_ID;
@@ -64,8 +66,10 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
      * return the array of type, if no any topography, return empty array.
      */
     public TopographyType[] getTopographyType() {
+        this.lock.readLock().lock();
         Set<TopographyType> topo = this.topographys.getEnvironment();
         TopographyType[] envStr = new TopographyType[topo.size()];
+        this.lock.readLock().unlock();
         return (TopographyType[]) topo.toArray(envStr);
     }
 
@@ -74,12 +78,15 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
      * array.
      */
     public GoodsType[] getStoreSpecialityType() {
+        this.lock.readLock().lock();
         Set<GoodsType> spe = this.topographys.getSpeciality();
         GoodsType[] envStr = new GoodsType[spe.size()];
+        this.lock.readLock().unlock();
         return (GoodsType[]) spe.toArray(envStr);
     }
 
     public void generateTopography(Topography env) {
+        this.lock.writeLock().lock();
         if (this.topographys != null && this.topographys.getOri() instanceof Store) {
             env.setTarget((Store) this.topographys.getOri());
             this.topographys = env;
@@ -87,13 +94,16 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
         } else {
             this.topographys = env;
         }
+        this.lock.writeLock().unlock();
     }
 
     private void generateWeather(Weather wth) {
+        this.lock.writeLock().lock();
         if (this.weather != null && this.weather.getOri() instanceof Path) {
             wth.setTarget((Path) this.weather.getOri());
         }
         this.weather = wth;
+        this.lock.writeLock().unlock();
     }
 
     /**
@@ -101,10 +111,17 @@ public abstract class BusinessPoint implements Subject, TimeInfluencable {
      * return null.
      */
     public Weather getWeather() {
-        if (!(this.weather instanceof Weather)) {
-            return null;
+        Weather w = null;
+        this.lock.readLock().lock();
+        try {
+            if (this.weather instanceof Weather) {
+                w = (Weather) this.weather;
+            }
+        } finally {
+            this.lock.readLock().unlock();
         }
-        return (Weather) this.weather;
+
+        return w;
     }
 
     /**

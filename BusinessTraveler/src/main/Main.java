@@ -79,8 +79,9 @@ public class Main {
         wMap.attach(jf.getDrawedPanel());
         u.attach(jf.getBasicInfoPanel());
         tHandler.attach(jf.getBasicInfoPanel());
-        wMap.setArrival(a);
 
+        wMap.setArrival(a);
+        u.notifyObserver();
 //        Thread.sleep(1000);
         jf.setVisible(true);
 //        Thread.sleep(1000);

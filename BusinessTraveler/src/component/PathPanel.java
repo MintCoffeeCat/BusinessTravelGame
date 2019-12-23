@@ -135,6 +135,8 @@ public class PathPanel extends javax.swing.JPanel implements Observer {
     @Override
     public void update(Subject s) {
         ImageIcon defaultIcon = new ImageIcon(this.getClass().getClassLoader().getResource("img/default.png"));
+        String defaultWeatherName = "No Weather";
+
         if (s instanceof WorldMap) {
             WorldMap wMap = WorldMap.getInstance();
             BusinessPoint a = wMap.getNowArrive();
@@ -153,21 +155,29 @@ public class PathPanel extends javax.swing.JPanel implements Observer {
             }
             if (a != null) {
                 ImageIcon icon = defaultIcon;
+                String weatherName = defaultWeatherName;
                 if (a.getWeather() != null) {
                     icon = a.getWeather().getImg();
+                    weatherName = (String) a.getWeather().getEnvironment().iterator().next().toString();
                 }
                 this.arrivalWeatherPic.setImage(icon);
+                this.aWeatherCost.setText(weatherName);
             } else {
                 this.arrivalWeatherPic.setImage(defaultIcon);
+                this.aWeatherCost.setText(defaultWeatherName);
             }
             if (b != null) {
                 ImageIcon icon = defaultIcon;
+                String weatherName = defaultWeatherName;
                 if (b.getWeather() != null) {
                     icon = b.getWeather().getImg();
+                    weatherName = (String) b.getWeather().getEnvironment().iterator().next().toString();
                 }
                 this.DestWeatherPic.setImage(icon);
+                this.bWeatherCost.setText(weatherName);
             } else {
                 this.DestWeatherPic.setImage(defaultIcon);
+                this.bWeatherCost.setText(defaultWeatherName);
             }
         }
         this.repaint();

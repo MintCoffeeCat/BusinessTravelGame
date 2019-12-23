@@ -63,14 +63,20 @@ public abstract class Environment<K, E> implements EnvironmentInfluencable<K, E>
     public Set<E> getEnvironment() {
         Set<E> envs = new HashSet<E>();
         envs.add(this.getEnvironmentType());
-        envs.addAll(this.target.getEnvironment());
+        if (this.target != null) {
+            envs.addAll(this.target.getEnvironment());
+        }
+
         return envs;
     }
 
     public Set<K> getSpeciality() {
         Set<K> speciality = new HashSet<K>();
         speciality.addAll(this.influence.keySet());
-        speciality.addAll(this.target.getSpeciality());
+        if (this.target != null) {
+            speciality.addAll(this.target.getSpeciality());
+        }
+
         return speciality;
     }
 
